@@ -4,6 +4,7 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UsuarioService {
@@ -13,8 +14,12 @@ export class UsuarioService {
   ){}
   async create(createUsuarioDto: CreateUsuarioDto) {
     try{
-      const usuario = this.usuarioRepository.create(createUsuarioDto);
-      await this.usuarioRepository.save(usuario);
+      const contraseñaHash = await hash(createUsuarioDto.contraseña, 10);
+      const usuario = this.usuarioRepository.create({
+        ...createUsuarioDto,
+        contraseña: contraseñaHash,
+      });
+      return await this.usuarioRepository.save(usuario);
     } catch(error){
       console.log(error);
       throw new InternalServerErrorException('Error: No se pudo crear el usuario')
@@ -34,6 +39,10 @@ export class UsuarioService {
   }
 
   async update(id: string, updateUsuarioDto: UpdateUsuarioDto) {
+    if (updateUsuarioDto.contraseña){
+      updateUsuarioDto.contraseña = await hash(updateUsuarioDto.contraseña, 10);
+    }
+
     const usuario = await this.usuarioRepository.preload({
       id,
       ...updateUsuarioDto,
