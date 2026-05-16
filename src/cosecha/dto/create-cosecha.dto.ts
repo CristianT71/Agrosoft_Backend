@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CreateCosechaDto {
 
@@ -21,4 +21,8 @@ export class CreateCosechaDto {
     @IsString()
     @IsOptional()
     observaciones: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    usuarioId: string;
 }
