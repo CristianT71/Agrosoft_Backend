@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Cosecha } from "../../cosecha/entities/cosecha.entity";
+import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 
 @Entity()
 export class Usuario {
@@ -20,4 +22,12 @@ export class Usuario {
     
     @Column({type: 'varchar', length: 20, nullable: true})
     telefono: string;
+
+    // Relaciones 
+
+    @OneToMany(() => Cosecha, (cosecha) => cosecha.usuario )
+    cosechas: Cosecha[];
+
+    @OneToMany(() => Incidencia, (incidencia) => incidencia.usuario )
+    incidencias: Incidencia[];
 }

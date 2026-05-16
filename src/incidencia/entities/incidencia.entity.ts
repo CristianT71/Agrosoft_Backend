@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Entity()
 export class Incidencia {
@@ -17,4 +18,9 @@ export class Incidencia {
     
     @Column({type: 'enum', enum: ['pendiente', 'en_proceso', 'resuelto'], default: 'pendiente'})
     estado: string;
+
+    //relaciones
+
+    @ManyToOne(() => Usuario, (usuario) => usuario.incidencias, { onDelete: 'CASCADE' })
+    usuario: Usuario;
 }
