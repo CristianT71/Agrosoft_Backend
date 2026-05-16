@@ -1,26 +1,59 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateCosechaDto } from './dto/create-cosecha.dto';
 import { UpdateCosechaDto } from './dto/update-cosecha.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Cosecha } from './entities/cosecha.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CosechaService {
-  create(createCosechaDto: CreateCosechaDto) {
-    return 'This action adds a new cosecha';
+  constructor(
+    @InjectRepository(Cosecha)
+    private readonly cosechaRepository: Repository<Cosecha>
+  ){}
+
+  async create(createCosechaDto: CreateCosechaDto) {
+    try {
+      const cosecha = this.cosechaRepository.create(createCosechaDto);
+      await this.cosechaRepository.save(cosecha)
+    } catch (error){
+      console.log(error)
+      throw new InternalServerErrorException('Error: No se pudo crear cosecha')
+    }
   }
 
-  findAll() {
-    return `This action returns all cosecha`;
+  async findAll() {
+    return this.cosechaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cosecha`;
+  async findOne(id: string) {
+    const cosecha = await this.cosechaRepository.findOneBy({ id })
+    if (!cosecha) {
+      throw new NotFoundException(`Cosecha con id ${id} no existe`)
+    }
+    return cosecha;
   }
 
-  update(id: number, updateCosechaDto: UpdateCosechaDto) {
-    return `This action updates a #${id} cosecha`;
+  async update(id: string, updateCosechaDto: UpdateCosechaDto) {
+    const cosecha = await this.cosechaRepository.preload({
+      id,
+      ...updateCosechaDto,
+    });
+    if (!cosecha){
+      throw new NotFoundException(`Cosecha con id ${id} no existe`)
+    }
+    try {
+      await this.cosechaRepository.save(cosecha);
+      return cosecha;
+    } catch (error){
+      console.log(error)
+      throw new InternalServerErrorException('Error: No se pudo actualizar la cosecha')
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cosecha`;
+  async remove(id: string) {
+    const cosecha = await this.findOne(id)
+    await this.cosechaRepository.remove(cosecha)
+    return 'Cosecha eliminada exitosamente';
   }
 }
