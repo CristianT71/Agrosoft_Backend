@@ -46,7 +46,7 @@ export class UsuarioService {
       return usuario;
     } catch (error){
       console.log(error)
-      throw new InternalServerErrorException('Error: no se pudo crear el usuario')
+      throw new InternalServerErrorException('Error: no se pudo actualizar el usuario')
     }
   }
 
