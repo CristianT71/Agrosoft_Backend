@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateIncidenciaDto {
     
@@ -17,5 +17,9 @@ export class CreateIncidenciaDto {
     @IsOptional()
     @IsEnum(['pendiente', 'en_proceso', 'resuelto'], { message: 'El estado debe ser: pendiente, en_proceso o resuelto' })
     estado?: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    usuarioId: string;
 }
 
