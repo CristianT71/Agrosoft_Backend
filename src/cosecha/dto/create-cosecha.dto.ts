@@ -1,1 +1,24 @@
-export class CreateCosechaDto {}
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+
+export class CreateCosechaDto {
+
+    @IsNotEmpty()
+    @IsDateString()
+    fecha_cosecha: Date;
+
+    @IsNumber()
+    @IsNotEmpty()
+    cantidad_cosechada: number;
+
+    @IsString()
+    @IsNotEmpty()
+    unidad_medida: string;
+
+    @IsString()
+    @IsNotEmpty()
+    tipo_cosecha: string;
+
+    @IsString()
+    @IsOptional()
+    observaciones: string;
+}
