@@ -19,16 +19,16 @@ export class CosechaController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cosechaService.findOne(+id);
+    return this.cosechaService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCosechaDto: UpdateCosechaDto) {
-    return this.cosechaService.update(+id, updateCosechaDto);
+    return this.cosechaService.update(id, updateCosechaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cosechaService.remove(+id);
+    return this.cosechaService.remove(id);
   }
 }
