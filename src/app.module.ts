@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/usuario.module';
+import { IncidenciaModule } from './incidencia/incidencia.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UsuarioModule } from './usuario/usuario.module';
       synchronize: true,
     }),
     UsuarioModule,
+    IncidenciaModule,
   ],
   controllers: [],
   providers: [],
