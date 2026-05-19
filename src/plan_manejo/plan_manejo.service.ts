@@ -1,11 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreatePlanManejoDto } from './dto/create-plan_manejo.dto';
 import { UpdatePlanManejoDto } from './dto/update-plan_manejo.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PlanManejo } from './entities/plan_manejo.entity';
+import { Repository } from 'typeorm/browser';
 
 @Injectable()
 export class PlanManejoService {
-  create(createPlanManejoDto: CreatePlanManejoDto) {
-    return 'This action adds a new planManejo';
+
+  constructor(
+    @InjectRepository(PlanManejo)
+    private readonly planManejoRepository: Repository<PlanManejo> 
+    ){}
+
+  async create(createPlanManejoDto: CreatePlanManejoDto) {
+    try {
+      const PlanManejo= this.planManejoRepository.create(createPlanManejoDto)
+      await this.planManejoRepository.save(PlanManejo);
+    } catch (error){
+      console.log(error);
+      throw new InternalServerErrorException('Error al registrar el Plan de Manejo')
+    }
   }
 
   findAll() {
