@@ -30,18 +30,18 @@ export class VentaService {
   }
 
   async findOne(id: string) {
-    const Venta = await this.VentaRepository.findOne({id})
+    const Venta = await this.VentaRepository.findOneBy({id});
     if(!Venta){
       throw new NotFoundException (`Venta con id ${id} no existe`)
     }
     return Venta;
   }
 
-  update(id: number, updateVentaDto: UpdateVentaDto) {
+  update(id: string, updateVentaDto: UpdateVentaDto) {
     return `This action updates a #${id} venta`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} venta`;
   }
 }
