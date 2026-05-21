@@ -12,5 +12,5 @@ export class CultivoReal {
     tamaño_lote: string;
 
     @Column()
-    
+    estado: string;
 }
