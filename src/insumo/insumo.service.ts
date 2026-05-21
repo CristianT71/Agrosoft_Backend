@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Insumo } from './entities/insumo.entity';
 
 @Injectable()
 export class InsumoService {
+
+  constructor(
+    @InjectRepository (Insumo)
+  ){}
   create(createInsumoDto: CreateInsumoDto) {
     return 'This action adds a new insumo';
   }
