@@ -20,8 +20,10 @@ export class CreateVentaDto {
 
     @IsString()
     @IsNotEmpty()
+    forma_pago: string;
 
     @IsString()
     @IsNotEmpty()
+    estado_pago: string;
 
 }
