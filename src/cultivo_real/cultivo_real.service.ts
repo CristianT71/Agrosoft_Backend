@@ -30,14 +30,14 @@ export class CultivoRealService {
   }
 
   async findOne(id: string) {
-    const cultivo_real = this.CultivoRealRepository.findOne({id});
+    const cultivo_real = this.CultivoRealRepository.findOneBy({id});
     if(!cultivo_real){
       throw new NotFoundException (`Cultivo real con id ${id} no existe`)
     }
     return CultivoReal;
   }
 
-  async update(id: number, updateCultivoRealDto: UpdateCultivoRealDto) {
+  async update(id: string, updateCultivoRealDto: UpdateCultivoRealDto) {
     const cultivo_real = await this.CultivoRealRepository.preload({
       id,
       ...updateCultivoRealDto
@@ -54,7 +54,9 @@ export class CultivoRealService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cultivoReal`;
+  async remove(id: string) {
+    const CultivoReal = await this.findOne(id);
+    await this.CultivoRealRepository.remove(CultivoReal);
+    return `el cultivo real fue eliminado exitosamente`;
   }
 }
