@@ -30,19 +30,34 @@ export class InsumoService {
   return await this.InsumoRepository.find()
   }
 
-  async findOne(id: number) {
-    const Insumo = await this.InsumoRepository.findOne({id});
+  async findOne(id: string) {
+    const Insumo = await this.InsumoRepository.findOneBy({id});
     if(!Insumo){
-      throw new NotFoundException (`Insumo con id $(id) no existe`)
+      throw new NotFoundException (`Insumo con id ${id} no existe`)
     }
     return Insumo;
   }
 
-  update(id: number, updateInsumoDto: UpdateInsumoDto) {
-    return `This action updates a #${id} insumo`;
+  async update(id: string, updateInsumoDto: UpdateInsumoDto) {
+    const insumo = await this.InsumoRepository.preload({
+      id,
+      ...updateInsumoDto
+    });
+    if(!insumo){
+      throw new NotFoundException(`insumo con id ${id} no existe`);
+    }
+    try{
+      await this.InsumoRepository.save(insumo);
+      return insumo
+    }catch(error){
+      console.log(error);
+      throw new InternalServerErrorException(`no se puede actualizar el insumo`)
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} insumo`;
+  async remove(id: string) {
+    const insumo = await this.findOne(id);
+    await this.InsumoRepository.remove(insumo);
+    return `insumo eliminado exitosamente`;
   }
 }

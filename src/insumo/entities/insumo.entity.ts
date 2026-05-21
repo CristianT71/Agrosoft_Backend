@@ -11,11 +11,11 @@ export class Insumo {
     @Column()
     categoria: string;
     @Column()
-    unidad_medida: number;
+    unidad_medida: string;
     @Column()
-    cantidad_disponible: number;
+    cantidad_disponible: string;
     @Column()
-    precio_unitario: number;
+    precio_unitario: string;
     @Column()
     estado: string;
 

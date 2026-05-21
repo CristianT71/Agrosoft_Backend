@@ -2,8 +2,8 @@ import { IsNotEmpty, IsString } from "class-validator";
 
 
 export class CreateInsumoDto {
-    @IsString()
-    @IsNotEmpty()
+        @IsString()
+        @IsNotEmpty()
         nombre: string;
 
         @IsString()
@@ -12,15 +12,15 @@ export class CreateInsumoDto {
 
         @IsString()
         @IsNotEmpty()
-        unidad_medida: number;
+        unidad_medida: string;
 
         @IsString()
         @IsNotEmpty()
-        cantidad_disponible: number;
+        cantidad_disponible: string;
 
         @IsString()
         @IsNotEmpty()
-        precio_unitario: number;
+        precio_unitario: string;
 
         @IsString()
         @IsNotEmpty()
