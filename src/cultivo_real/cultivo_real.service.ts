@@ -9,32 +9,31 @@ import { CultivoReal } from './entities/cultivo_real.entity';
 export class CultivoRealService {
 
   constructor(
-    @InjectRepository (CultivoReal)
-    private readonly CultivoRealRepository:
-    Repository<CultivoReal>
-  ){}
+    @InjectRepository(CultivoReal)
+    private readonly CultivoRealRepository: Repository<CultivoReal>
+  ) {}
 
   async create(createCultivoRealDto: CreateCultivoRealDto) {
-    try{
-      const CultivoReal = this.CultivoRealRepository.create
-      (createCultivoRealDto);
-      await this.CultivoRealRepository.save(CultivoReal);
-    }catch (error){
+    try {
+      const cultivo_real = this.CultivoRealRepository.create(createCultivoRealDto); 
+      await this.CultivoRealRepository.save(cultivo_real);
+      return cultivo_real; 
+    } catch (error) {
       console.log(error);
-      throw new InternalServerErrorException(`error al registrar el cultivo real`)
+      throw new InternalServerErrorException(`error al registrar el cultivo real`);
     }
   }
 
   async findAll() {
-    return await this.CultivoRealRepository.find()
+    return await this.CultivoRealRepository.find();
   }
 
   async findOne(id: string) {
-    const cultivo_real = this.CultivoRealRepository.findOneBy({id});
-    if(!cultivo_real){
-      throw new NotFoundException (`Cultivo real con id ${id} no existe`)
+    const cultivo_real = await this.CultivoRealRepository.findOneBy({ id });
+    if (!cultivo_real) {
+      throw new NotFoundException(`Cultivo real con id ${id} no existe`);
     }
-    return CultivoReal;
+    return cultivo_real;
   }
 
   async update(id: string, updateCultivoRealDto: UpdateCultivoRealDto) {
@@ -42,21 +41,21 @@ export class CultivoRealService {
       id,
       ...updateCultivoRealDto
     });
-    if(!cultivo_real){
+    if (!cultivo_real) {
       throw new NotFoundException(`cultivo real con id ${id} no existe`);
     }
-    try{
+    try {
       await this.CultivoRealRepository.save(cultivo_real);
-      return cultivo_real
-    }catch(error){
+      return cultivo_real;
+    } catch (error) {
       console.log(error);
-      throw new InternalServerErrorException(`no se puede actualizar el cultivo real`)
+      throw new InternalServerErrorException(`no se puede actualizar el cultivo real`);
     }
   }
 
   async remove(id: string) {
-    const CultivoReal = await this.findOne(id);
-    await this.CultivoRealRepository.remove(CultivoReal);
+    const cultivo_real = await this.findOne(id);
+    await this.CultivoRealRepository.remove(cultivo_real);
     return `el cultivo real fue eliminado exitosamente`;
   }
 }
