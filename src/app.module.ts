@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { InsumoModule } from './insumo/insumo.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { VentaModule } from './venta/venta.module';
+import { CultivoRealModule } from './cultivo_real/cultivo_real.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { VentaModule } from './venta/venta.module';
     InsumoModule,
     ReporteModule,
     VentaModule,
+    CultivoRealModule,
   ],
   controllers: [],
   providers: [],
