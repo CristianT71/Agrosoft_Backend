@@ -1,9 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCultivoRealDto } from './dto/create-cultivo_real.dto';
 import { UpdateCultivoRealDto } from './dto/update-cultivo_real.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CultivoReal } from './entities/cultivo_real.entity';
 
 @Injectable()
 export class CultivoRealService {
+
+  constructor(
+    @InjectRepository (CultivoReal)
+    private readonly CultivoRealRepository:
+    Repository<CultivoReal>
+  ){}
+  
   create(createCultivoRealDto: CreateCultivoRealDto) {
     return 'This action adds a new cultivoReal';
   }
