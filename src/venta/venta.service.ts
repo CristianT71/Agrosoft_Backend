@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotAcceptableException, NotFoundException } from '@nestjs/common';
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -29,8 +29,12 @@ export class VentaService {
     return await this.VentaRepository.find()
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} venta`;
+  async findOne(id: string) {
+    const Venta = await this.VentaRepository.findOne({id})
+    if(!Venta){
+      throw new NotFoundException (`Venta con id ${id} no existe`)
+    }
+    return Venta;
   }
 
   update(id: number, updateVentaDto: UpdateVentaDto) {
