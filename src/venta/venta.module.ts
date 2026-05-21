@@ -5,5 +5,8 @@ import { VentaController } from './venta.controller';
 @Module({
   controllers: [VentaController],
   providers: [VentaService],
+  imports:[
+    type
+  ]
 })
 export class VentaModule {}
