@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,16 +13,23 @@ export class VentaService {
     private readonly VentaRepository:
     Repository<Venta>,
   ){}
-  
-  create(createVentaDto: CreateVentaDto) {
-    return 'This action adds a new venta';
+
+  async create(createVentaDto: CreateVentaDto) {
+    try{
+      const Venta = this.VentaRepository.create
+      (createVentaDto);
+      await this.VentaRepository.save(Venta);
+    }catch (error){
+      console.log(error);
+      throw new InternalServerErrorException(`error al registrar la venta `)
+    }
   }
 
-  findAll() {
-    return `This action returns all venta`;
+  async findAll() {
+    return await this.VentaRepository.find()
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} venta`;
   }
 
