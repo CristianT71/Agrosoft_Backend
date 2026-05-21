@@ -37,11 +37,26 @@ export class VentaService {
     return Venta;
   }
 
-  update(id: string, updateVentaDto: UpdateVentaDto) {
-    return `This action updates a #${id} venta`;
+  async update(id: string, updateVentaDto: UpdateVentaDto) {
+    const Venta = await this.VentaRepository.preload({
+      id,
+      ...updateVentaDto
+    });
+    if(!Venta){
+      throw new NotFoundException(`venta con id ${id} no existe`);
+    }
+    try{
+      await this.VentaRepository.save(Venta);
+      return Venta
+    }catch(error){
+      console.log(error);
+      throw new InternalServerErrorException(`No se puede actualizar la venta`)
+    }
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} venta`;
+  async remove(id: string) {
+    const Venta = await this.findOne(id);
+    await this.VentaRepository.remove(Venta);
+    return `la venta se elimino exitosamente`;
   }
 }
