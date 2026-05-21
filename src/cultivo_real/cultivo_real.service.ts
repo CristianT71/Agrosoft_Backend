@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateCultivoRealDto } from './dto/create-cultivo_real.dto';
 import { UpdateCultivoRealDto } from './dto/update-cultivo_real.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,21 +13,45 @@ export class CultivoRealService {
     private readonly CultivoRealRepository:
     Repository<CultivoReal>
   ){}
-  
-  create(createCultivoRealDto: CreateCultivoRealDto) {
-    return 'This action adds a new cultivoReal';
+
+  async create(createCultivoRealDto: CreateCultivoRealDto) {
+    try{
+      const CultivoReal = this.CultivoRealRepository.create
+      (createCultivoRealDto);
+      await this.CultivoRealRepository.save(CultivoReal);
+    }catch (error){
+      console.log(error);
+      throw new InternalServerErrorException(`error al registrar el cultivo real`)
+    }
   }
 
-  findAll() {
-    return `This action returns all cultivoReal`;
+  async findAll() {
+    return await this.CultivoRealRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cultivoReal`;
+  async findOne(id: string) {
+    const cultivo_real = this.CultivoRealRepository.findOne({id});
+    if(!cultivo_real){
+      throw new NotFoundException (`Cultivo real con id ${id} no existe`)
+    }
+    return CultivoReal;
   }
 
-  update(id: number, updateCultivoRealDto: UpdateCultivoRealDto) {
-    return `This action updates a #${id} cultivoReal`;
+  async update(id: number, updateCultivoRealDto: UpdateCultivoRealDto) {
+    const cultivo_real = await this.CultivoRealRepository.preload({
+      id,
+      ...updateCultivoRealDto
+    });
+    if(!cultivo_real){
+      throw new NotFoundException(`cultivo real con id ${id} no existe`);
+    }
+    try{
+      await this.CultivoRealRepository.save(cultivo_real);
+      return cultivo_real
+    }catch(error){
+      console.log(error);
+      throw new InternalServerErrorException(`no se puede actualizar el cultivo real`)
+    }
   }
 
   remove(id: number) {
