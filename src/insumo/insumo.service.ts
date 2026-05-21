@@ -1,25 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Insumo } from './entities/insumo.entity';
+import { Repository } from 'typeorm';
+import { find } from 'rxjs';
 
 @Injectable()
 export class InsumoService {
 
   constructor(
     @InjectRepository (Insumo)
+    private readonly InsumoRepository:
+    Repository<Insumo>,
   ){}
-  create(createInsumoDto: CreateInsumoDto) {
-    return 'This action adds a new insumo';
+
+  async create(createInsumoDto: CreateInsumoDto) {
+    try{
+      const Insumo = this.InsumoRepository.create
+      (createInsumoDto);
+      await this.InsumoRepository.save(Insumo);
+    }catch (error){
+      console.log(error);
+      throw new InternalServerErrorException('error al registrar el insumo');
+    }
   }
 
-  findAll() {
-    return `This action returns all insumo`;
+  async findAll() {
+  return await this.InsumoRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} insumo`;
+  async findOne(id: number) {
+    const Insumo = await this.InsumoRepository.findOne({id});
+    if(!Insumo){
+      throw new NotFoundException (`Insumo con id $(id) no existe`)
+    }
+    return Insumo;
   }
 
   update(id: number, updateInsumoDto: UpdateInsumoDto) {
