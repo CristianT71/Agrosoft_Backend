@@ -19,16 +19,16 @@ export class CultivoRealController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cultivoRealService.findOne(+id);
+    return this.cultivoRealService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCultivoRealDto: UpdateCultivoRealDto) {
-    return this.cultivoRealService.update(+id, updateCultivoRealDto);
+    return this.cultivoRealService.update(id, updateCultivoRealDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cultivoRealService.remove(+id);
+    return this.cultivoRealService.remove(id);
   }
 }
