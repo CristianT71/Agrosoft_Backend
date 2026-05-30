@@ -5,6 +5,7 @@ import { IncidenciaModule } from './incidencia/incidencia.module';
 import { EvidenciaModule } from './evidencia/evidencia.module';
 import { TipoIncidenciaModule } from './tipo_incidencia/tipo_incidencia.module';
 import { TipoIncidenciaModule } from './tipo_incidencia/tipo_incidencia.module';
+import { TipoIncidenciaModule } from './tipo_incidencia/tipo_incidencia.module';
 import { EvidenciaModule } from './evidencia/evidencia.module';
 
 @Module({
