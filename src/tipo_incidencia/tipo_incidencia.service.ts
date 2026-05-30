@@ -1,26 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TipoIncidencia } from './entities/tipo_incidencia.entity';
 import { CreateTipoIncidenciaDto } from './dto/create-tipo_incidencia.dto';
-import { UpdateTipoIncidenciaDto } from './dto/update-tipo_incidencia.dto';
 
 @Injectable()
 export class TipoIncidenciaService {
-  create(createTipoIncidenciaDto: CreateTipoIncidenciaDto) {
-    return 'This action adds a new tipoIncidencia';
+  constructor(
+    @InjectRepository(TipoIncidencia)
+    private readonly tipoIncidenciaRepository: Repository<TipoIncidencia>,
+  ) {}
+
+  async crear(createTipoIncidenciaDto: CreateTipoIncidenciaDto): Promise<TipoIncidencia> {
+    const nuevoTipo = this.tipoIncidenciaRepository.create(createTipoIncidenciaDto);
+    return await this.tipoIncidenciaRepository.save(nuevoTipo);
   }
 
-  findAll() {
-    return `This action returns all tipoIncidencia`;
+  async obtenerTodos(): Promise<TipoIncidencia[]> {
+    return await this.tipoIncidenciaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tipoIncidencia`;
-  }
-
-  update(id: number, updateTipoIncidenciaDto: UpdateTipoIncidenciaDto) {
-    return `This action updates a #${id} tipoIncidencia`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} tipoIncidencia`;
+  async obtenerUno(id: number): Promise<TipoIncidencia> {
+    const tipo = await this.tipoIncidenciaRepository.findOneBy({ id });
+    if (!tipo) {
+      throw new NotFoundException(`El tipo de incidencia con ID ${id} no existe`);
+    }
+    return tipo;
   }
 }
