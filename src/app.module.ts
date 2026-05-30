@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { IncidenciaModule } from './incidencia/incidencia.module';
+import { EvidenciaModule } from './evidencia/evidencia.module';
+import { TipoIncidenciaModule } from './tipo_incidencia/tipo_incidencia.module';
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    IncidenciaModule,
+    EvidenciaModule,
+    TipoIncidenciaModule,
   ],
   controllers: [],
   providers: [],
