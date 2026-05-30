@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Incidencia } from '../incidencia/incidencia.entity'; // Ajusta la ruta según tu proyecto
+import { Incidencia } from '../incidencia/incidencia.entity'; // Ajusta la ruta cuando crees Incidencia
 
 @Entity('tipo_incidencia')
 export class TipoIncidencia {
@@ -10,7 +10,7 @@ export class TipoIncidencia {
   nombre: string;
 
   @Column({ type: 'varchar', length: 255 })
-  tipo: string; // Ejemplo: enfermedad, plaga
+  tipo: string;
 
   @Column({ type: 'varchar', length: 255 })
   grado_daño: string;
@@ -18,7 +18,6 @@ export class TipoIncidencia {
   @Column({ type: 'text', nullable: true })
   descripcion: string;
 
-  // Relación uno a muchos con Incidencia (un tipo puede estar en muchas incidencias)
-  @OneToMany(() => Incidencia, (incidencia) => i.tipoIncidencia)
+  @OneToMany(() => Incidencia, (incidencia) => incidencia.tipoIncidencia)
   incidencias: Incidencia[];
 }
