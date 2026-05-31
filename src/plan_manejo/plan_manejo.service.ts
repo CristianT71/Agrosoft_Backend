@@ -33,11 +33,10 @@ export class PlanManejoService {
       throw new NotFoundException(`Plan de Manejo con el id ${id} no existe`);
     }
     return PlanManejo;
-
   }
 
-  update(id: number, updatePlanManejoDto: UpdatePlanManejoDto) {
-    return `This action updates a #${id} planManejo`;
+  async update(id: string, updatePlanManejoDto: UpdatePlanManejoDto) {
+    
   }
 
   remove(id: number) {
