@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Evidencia } from './entities/evidencia.entity';
 import { CreateEvidenciaDto } from './dto/create-evidencia.dto';
-import { UpdateEvidenciaDto } from './dto/update-evidencia.dto';
 
 @Injectable()
 export class EvidenciaService {
-  create(createEvidenciaDto: CreateEvidenciaDto) {
-    return 'This action adds a new evidencia';
+  constructor(
+    @InjectRepository(Evidencia)
+    private readonly evidenciaRepository: Repository<Evidencia>,
+  ) {}
+
+  async crear(createEvidenciaDto: CreateEvidenciaDto): Promise<Evidencia> {
+    const nuevaEvidencia = this.evidenciaRepository.create(createEvidenciaDto);
+    return await this.evidenciaRepository.save(nuevaEvidencia);
   }
 
-  findAll() {
-    return `This action returns all evidencia`;
+  async obtenerTodas(): Promise<Evidencia[]> {
+    return await this.evidenciaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} evidencia`;
-  }
-
-  update(id: number, updateEvidenciaDto: UpdateEvidenciaDto) {
-    return `This action updates a #${id} evidencia`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} evidencia`;
+  async obtenerPorIncidencia(idIncidencia: number): Promise<Evidencia[]> {
+    return await this.evidenciaRepository.findBy({ id_incidencia: idIncidencia });
   }
 }
