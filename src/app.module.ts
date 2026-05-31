@@ -6,16 +6,15 @@ import { EvidenciaModule } from './evidencia/evidencia.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres', // o 'mysql'
-      host: process.env.DB_HOST || 'localhost',
-      // LÍNEA CORREGIDA AQUÍ:
-      port: parseInt(process.env.DB_PORT || '5432'), 
-      username: process.env.DB_USERNAME || 'postgres',
-      password: process.env.DB_PASSWORD || 'tu_contraseña',
-      database: process.env.DB_NAME || 'agrosoft_db',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+  type: 'postgres',
+  host: '127.0.0.1', // Cambiamos 'localhost' por la IP directa para evitar problemas de red
+  port: 5433,
+  username: 'postgres',
+  password: '123', // <--- PON AQUÍ la contraseña real que uses siempre en tu PostgreSQL o pgAdmin
+  database: 'agrosoft_db',
+  autoLoadEntities: true,
+  synchronize: true,
+}),
     TipoIncidenciaModule,
     EvidenciaModule,
   ],
