@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreatePlanManejoDto } from './dto/create-plan_manejo.dto';
 import { UpdatePlanManejoDto } from './dto/update-plan_manejo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,12 +23,17 @@ export class PlanManejoService {
     }
   }
 
-  findAll() {
-    return `This action returns all planManejo`;
+  async findAll() {
+    return this.planManejoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} planManejo`;
+  async findOne(id: string) {
+    const PlanManejo = await this.planManejoRepository.findOneBy({ id });
+    if (!PlanManejo){
+      throw new NotFoundException(`Plan de Manejo con el id ${id} no existe`);
+    }
+    return PlanManejo;
+
   }
 
   update(id: number, updatePlanManejoDto: UpdatePlanManejoDto) {
