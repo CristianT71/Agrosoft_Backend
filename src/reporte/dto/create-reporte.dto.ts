@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, IsUUID } from "class-validator";
 
 
 export class CreateReporteDto {
@@ -13,5 +13,9 @@ export class CreateReporteDto {
     @IsString()
     @IsNotEmpty()
     formato_reporte: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    ventaId:string;
 }
 

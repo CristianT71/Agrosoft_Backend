@@ -4,20 +4,30 @@ import { UpdateReporteDto } from './dto/update-reporte.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reporte } from './entities/reporte.entity';
 import { Repository } from 'typeorm';
+import { Venta } from '../venta/entities/venta.entity';
 
 @Injectable()
 export class ReporteService {
 
   constructor(
     @InjectRepository (Reporte)
-    private readonly ReporteRepository:
-    Repository<Reporte>,
+    private readonly ReporteRepository:Repository<Reporte>,
+
+    @InjectRepository (Venta)
+    private readonly ventaRepository: Repository<Venta>
   ){}
   async create(createReporteDto: CreateReporteDto) {
+    const {ventaId, ...datosReporte} = createReporteDto;
+    const venta = await this.ventaRepository.findOneBy({id: ventaId});
+    if (!venta) {
+      throw new NotFoundException(`venta con id ${ventaId} No existe`)
+    }
     try{
-      const Reporte = this.ReporteRepository.create
-      (createReporteDto);
-      await this.ReporteRepository.save(Reporte);
+      const Reporte = this.ReporteRepository.create({
+      ...datosReporte,
+      venta,
+      });
+    return await this.ReporteRepository.save(venta);
     }catch (error){
       console.log(error);
       throw new InternalServerErrorException(`error al registrar el reporte`)

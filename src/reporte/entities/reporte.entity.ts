@@ -1,4 +1,5 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
+import { Venta } from "../../venta/entities/venta.entity";
 
 @Entity()
 export class Reporte {
@@ -12,4 +13,8 @@ export class Reporte {
 
     @Column()
     formato_reporte: string;
+    
+
+    @ManyToOne(() => Venta, (venta) => venta.reportes, {onDelete :'CASCADE'})
+    venta: Venta;
 }

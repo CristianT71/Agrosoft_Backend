@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, IsUUID } from "class-validator";
 
 
 export class CreateVentaDto {
@@ -25,5 +25,9 @@ export class CreateVentaDto {
     @IsString()
     @IsNotEmpty()
     estado_pago: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    ReporteId:string;
 
 }

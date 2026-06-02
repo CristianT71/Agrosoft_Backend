@@ -1,5 +1,6 @@
 import { IsString } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Reporte } from "../../reporte/entities/reporte.entity";
 
 @Entity()
 export class Venta {
@@ -23,4 +24,8 @@ export class Venta {
 
     @Column()
     estado_pago: string;
+    
+    @OneToMany(() => Reporte, (reporte) => reporte.venta)
+    reporte: Reporte
+    reportes: any;
 }
