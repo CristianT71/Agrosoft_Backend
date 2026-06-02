@@ -1,7 +1,10 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Tratamiento {
+
+    @PrimaryColumn({type: 'uuid'})
+    id: string;
 
     @Column({type: 'string'})
     actividad_sugerida: string;

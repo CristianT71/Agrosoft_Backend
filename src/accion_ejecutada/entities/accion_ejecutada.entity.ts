@@ -1,7 +1,10 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 Entity('accion_ejecutada')
 export class AccionEjecutada {
+
+@PrimaryColumn({type: 'uuid'})
+id: string;
 
 @Column({type: 'date'})
 fecha_ejecucion: Date;

@@ -19,16 +19,16 @@ export class TratamientoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.tratamientoService.findOne(+id);
+    return this.tratamientoService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTratamientoDto: UpdateTratamientoDto) {
-    return this.tratamientoService.update(+id, updateTratamientoDto);
+    return this.tratamientoService.update(id, updateTratamientoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.tratamientoService.remove(+id);
+    return this.tratamientoService.remove(id);
   }
 }

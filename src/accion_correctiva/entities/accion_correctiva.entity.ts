@@ -1,7 +1,10 @@
-import { Column, Entity} from "typeorm"
+import { Column, Entity, PrimaryColumn} from "typeorm"
 
 Entity('accion_correctiva')
 export class AccionCorrectiva {
+
+@PrimaryColumn({type: 'uuid'})
+id: string;
 
 @Column({type: 'string'})
 accion: string;
