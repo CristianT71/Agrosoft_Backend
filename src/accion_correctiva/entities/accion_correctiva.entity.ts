@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn} from "typeorm"
 
-Entity('accion_correctiva')
+@Entity('accion_correctiva')
 export class AccionCorrectiva {
 
 @PrimaryColumn({type: 'uuid'})
