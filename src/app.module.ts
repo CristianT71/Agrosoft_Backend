@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccionCorrectivaModule } from './accion_correctiva/accion_correctiva.module';
 import { AccionEjecutadaModule } from './accion_ejecutada/accion_ejecutada.module';
+import { TratamientoModule} from './tratamiento/tratamiento.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AccionEjecutadaModule } from './accion_ejecutada/accion_ejecutada.modul
     }),
     AccionCorrectivaModule,
     AccionEjecutadaModule,
+    TratamientoModule,
   ],
   controllers: [],
   providers: [],

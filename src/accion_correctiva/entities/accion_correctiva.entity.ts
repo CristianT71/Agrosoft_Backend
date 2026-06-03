@@ -6,7 +6,7 @@ export class AccionCorrectiva {
 @PrimaryColumn({type: 'uuid'})
 id: string;
 
-@Column({type: 'string'})
+@Column({type: 'varchar', length: 255})
 accion: string;
 
 @Column({type: 'date'})
@@ -18,7 +18,7 @@ cantidad_usada: number;
 @Column({type:'decimal'})
 costo_aplicado: number;
 
-@Column({type: 'string'})
+@Column({type: 'varchar', length: 255})
 resultado_preeliminar: string;
 
 }

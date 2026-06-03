@@ -6,19 +6,19 @@ export class Tratamiento {
     @PrimaryColumn({type: 'uuid'})
     id: string;
 
-    @Column({type: 'string'})
+    @Column({type: 'varchar', length: 255})
     actividad_sugerida: string;
 
     @Column({type: 'int'})
     orden: number;
 
-    @Column({type: 'string'})
+    @Column({type: 'varchar', length: 255})
     tipo_tratatmiento: string;
 
     @Column({type:'date'})
     fecha_aplicacion_sugerida: Date;
 
-    @Column({type: 'string'})
+    @Column({type: 'varchar', length: 255})
     descripcion: string;
 
     @Column({type:'decimal'})

@@ -15,7 +15,7 @@ cantidad_usada: number;
 @Column({type: 'decimal'})
 costo_aplicado: number;
 
-@Column({type: 'string'})
+@Column({type: 'varchar', length: 255})
 observaciones: string;
 
 }
