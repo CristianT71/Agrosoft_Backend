@@ -1,1 +1,6 @@
-export class CreateInsumoDto {}
+
+
+export class CreateInsumoDto {
+
+    
+}
