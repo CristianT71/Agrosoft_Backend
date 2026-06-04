@@ -9,4 +9,8 @@ export class CreateInsumoDto {
     @IsString()
     @IsNotEmpty()
     Categoria: string;
+
+    @IsString()
+    @IsNotEmpty()
+    Unidad_Medida: string;
 }
