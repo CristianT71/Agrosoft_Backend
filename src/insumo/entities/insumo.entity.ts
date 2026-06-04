@@ -20,6 +20,8 @@ export class Insumo {
     @Column({ type: 'number' })
     Cantidad_disponible: number;
 
+    @Column({ type: 'number' })
+    Precio_Unitario: number;
     
 
 }
