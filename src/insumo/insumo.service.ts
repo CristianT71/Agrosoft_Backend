@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,8 +15,13 @@ export class InsumoService {
   ){}
 
 
-  create(createInsumoDto: CreateInsumoDto) {
-    return 'This action adds a new insumo';
+  async create(createInsumoDto: CreateInsumoDto) {
+    try{
+      const Insumo= this.InsumoRepository.create(createInsumoDto)
+      await this.InsumoRepository.save(Insumo);
+    } catch (error){
+      throw new InternalServerErrorException('Error al registrar el Insumo')
+    }
   }
 
   findAll() {
