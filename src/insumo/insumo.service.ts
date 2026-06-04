@@ -46,7 +46,9 @@ export class InsumoService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} insumo`;
+  async remove(id: string) {
+    const Insumo = await this.findOne(id);
+    await this.InsumoRepository.remove(Insumo);
+    return 'Esta actividad fue ejecutada correctamente';
   }
 }
