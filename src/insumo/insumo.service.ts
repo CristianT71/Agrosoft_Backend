@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -28,11 +28,15 @@ export class InsumoService {
     return this.InsumoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} insumo`;
+  async findOne(id: string) {
+    const Insumo= await this.InsumoRepository.findOneBy({ id });
+    if (!Insumo){
+      throw new NotFoundException(`Insumo con el id ${id} no existe `)
+    }
+    return Insumo;
   }
 
-  update(id: number, updateInsumoDto: UpdateInsumoDto) {
+  async update(id: string, updateInsumoDto: UpdateInsumoDto) {
     return `This action updates a #${id} insumo`;
   }
 
