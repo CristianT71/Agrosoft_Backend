@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlanManejoModule } from './plan_manejo/plan_manejo.module';
+import { InsumoModule } from './insumo/insumo.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PlanManejoModule } from './plan_manejo/plan_manejo.module';
       synchronize: true,
     }),
     PlanManejoModule,
+    InsumoModule,
   ],
   controllers: [],
   providers: [],
