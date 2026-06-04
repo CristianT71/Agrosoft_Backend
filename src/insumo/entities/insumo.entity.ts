@@ -1,10 +1,11 @@
-import { Entity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
 
 export class Insumo {
 
-    @Inje
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
 }
