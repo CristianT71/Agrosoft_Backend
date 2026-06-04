@@ -20,5 +20,9 @@ export class CreateInsumoDto {
 
     @IsNumber()
     @IsNotEmpty()
-    Precio_Unitario: number;   
+    Precio_Unitario: number;
+    
+    @IsString()
+    @IsNotEmpty()
+    Estado: string;
 }
