@@ -6,5 +6,7 @@ export class CreateInsumoDto {
     @IsNotEmpty()
     Nombre: string;
 
-
+    @IsString()
+    @IsNotEmpty()
+    Categoria: string;
 }
