@@ -22,6 +22,8 @@ export class Insumo {
 
     @Column({ type: 'number' })
     Precio_Unitario: number;
-    
+
+    @Column({ type: 'string' })
+    Estado: string;
 
 }
