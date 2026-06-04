@@ -40,6 +40,9 @@ export class PlanManejoService {
       id,
       ...updatePlanManejoDto,
     });
+    if(planManejo){
+      throw new NotFoundException(`Plan manejo con id ${id} no existe`);
+    }
   }
 
   remove(id: number) {
