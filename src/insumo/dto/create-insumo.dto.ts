@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from "class-validator";
+import { IsString, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateInsumoDto {
 
@@ -13,4 +13,8 @@ export class CreateInsumoDto {
     @IsString()
     @IsNotEmpty()
     Unidad_Medida: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    Cantidad_disponible: number;
 }
