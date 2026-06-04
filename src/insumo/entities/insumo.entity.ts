@@ -11,6 +11,7 @@ export class Insumo {
     @Column({ type: 'string' })
     Nombre: string;
 
-    
+    @Column({ type: 'string' })
+    Categoria: string;
 
 }
