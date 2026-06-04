@@ -19,16 +19,16 @@ export class PlanManejoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.planManejoService.findOne(+id);
+    return this.planManejoService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePlanManejoDto: UpdatePlanManejoDto) {
-    return this.planManejoService.update(+id, updatePlanManejoDto);
+    return this.planManejoService.update(id, updatePlanManejoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.planManejoService.remove(+id);
+    return this.planManejoService.remove(id);
   }
 }
