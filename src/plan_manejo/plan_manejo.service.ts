@@ -36,7 +36,10 @@ export class PlanManejoService {
   }
 
   async update(id: string, updatePlanManejoDto: UpdatePlanManejoDto) {
-    
+    const planManejo = await this.planManejoRepository.preload({
+      id,
+      ...updatePlanManejoDto,
+    });
   }
 
   remove(id: number) {
