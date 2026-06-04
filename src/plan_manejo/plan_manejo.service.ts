@@ -45,7 +45,8 @@ export class PlanManejoService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} planManejo`;
+  async remove(id: string) {
+    const planManejo = await this.findOne(id) ;
+    await this.planManejoRepository.remove(planManejo);
   }
 }
