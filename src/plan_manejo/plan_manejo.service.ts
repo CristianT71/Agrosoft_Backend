@@ -48,5 +48,6 @@ export class PlanManejoService {
   async remove(id: string) {
     const planManejo = await this.findOne(id) ;
     await this.planManejoRepository.remove(planManejo);
+    return 'La actividad fue ejecutada correctamente';
   }
 }
