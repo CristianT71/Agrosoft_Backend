@@ -37,7 +37,13 @@ export class InsumoService {
   }
 
   async update(id: string, updateInsumoDto: UpdateInsumoDto) {
-    return `This action updates a #${id} insumo`;
+    const Insumo= await this.InsumoRepository.preload({
+      id,
+      ...updateInsumoDto,
+    });
+    if(Insumo){
+      throw new NotFoundException(`Insumo con id ${id} no existe`)
+    }
   }
 
   remove(id: number) {
