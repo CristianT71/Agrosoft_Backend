@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EvidenciaModule } from './evidencia/evidencia.module';
+import { RolModule } from './rol/rol.module';
+import { TipoIncidenciaModule } from './tipo-incidencia/tipo-incidencia.module';
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    EvidenciaModule,
+    RolModule,
+    TipoIncidenciaModule,
   ],
   controllers: [],
   providers: [],
