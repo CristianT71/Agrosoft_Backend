@@ -14,4 +14,7 @@ export class Insumo {
     @Column({ type: 'string' })
     Categoria: string;
 
+    @Column({ type: 'string' })
+    Unidad_Medida: string;
+
 }
