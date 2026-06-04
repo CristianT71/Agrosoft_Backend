@@ -24,8 +24,8 @@ export class InsumoService {
     }
   }
 
-  findAll() {
-    return `This action returns all insumo`;
+  async findAll() {
+    return this.InsumoRepository.find();
   }
 
   findOne(id: number) {
