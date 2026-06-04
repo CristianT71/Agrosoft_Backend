@@ -17,4 +17,8 @@ export class CreateInsumoDto {
     @IsNumber()
     @IsNotEmpty()
     Cantidad_disponible: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    Precio_Unitario: number;   
 }
