@@ -1,10 +1,9 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
-
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateAccionEjecutadaDto {
-@IsDate()
-@IsNotEmpty()
-fecha_ejecucion: Date;
+  @IsDateString()
+  @IsNotEmpty()
+  fecha_ejecucion: string;
 
 @IsNumber()
 @IsNotEmpty()
