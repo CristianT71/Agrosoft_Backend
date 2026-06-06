@@ -7,6 +7,10 @@ import { CultivoBaseModule } from './cultivo_base/cultivo_base.module';
 import { EvidenciaModule } from './evidencia/evidencia.module';
 import { TipoIncidencia } from './tipo-incidencia/entities/tipo-incidencia.entity';
 import { Rol } from './rol/entities/rol.entity';
+import { CultivoReal } from './cultivo_real/entities/cultivo_real.entity';
+import { Insumo } from './insumo/entities/insumo.entity';
+import { Reporte } from './reporte/entities/reporte.entity';
+import { Venta } from './venta/entities/venta.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -29,6 +33,11 @@ import { ConfigModule } from '@nestjs/config';
     EvidenciaModule,
     TipoIncidencia,
     Rol,
+    CultivoReal,
+    Insumo,
+    Reporte,
+    Venta
+
   ],
   controllers: [],
   providers: [],
