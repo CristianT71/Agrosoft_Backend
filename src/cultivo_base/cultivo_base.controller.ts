@@ -19,16 +19,16 @@ export class CultivoBaseController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cultivoBaseService.findOne(+id);
+    return this.cultivoBaseService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCultivoBaseDto: UpdateCultivoBaseDto) {
-    return this.cultivoBaseService.update(+id, updateCultivoBaseDto);
+    return this.cultivoBaseService.update(id, updateCultivoBaseDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cultivoBaseService.remove(+id);
+    return this.cultivoBaseService.remove(id);
   }
 }
