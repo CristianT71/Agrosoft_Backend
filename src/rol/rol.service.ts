@@ -38,8 +38,14 @@ export class RolService {
 
   async update(id: string, updateRolDto: UpdateRolDto) {
     const rol = await this.rolRepository.preload({ id, ...updateRolDto });
-    if (rol) {
+    if (!rol) {
       throw new NotFoundException(`Rol con id ${id} no encontrado`);
+    }
+
+    try {
+      return await this.rolRepository.save(rol);
+    } catch (error) {
+      throw new InternalServerErrorException('Error: no se pudo actualizar el rol');
     }
   }
 
