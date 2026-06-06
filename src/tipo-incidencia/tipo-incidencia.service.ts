@@ -37,8 +37,8 @@ export class TipoIncidenciaService {
     const tipoIncidencia = await this.tipoIncidenciaRepository.preload({
       id, ...updateTipoIncidenciaDto,
     });
-    if(tipoIncidencia) {
-      throw new NotFoundException('Tipo incidencia con el id ${id} no encontrado')
+    if(!tipoIncidencia) {
+      throw new NotFoundException(`Tipo incidencia con el id ${id} no encontrado`)
   }
   }
   async remove(id: string) {

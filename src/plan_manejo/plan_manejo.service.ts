@@ -36,18 +36,18 @@ export class PlanManejoService {
   }
 
   async update(id: string, updatePlanManejoDto: UpdatePlanManejoDto) {
-    const planManejo = await this.planManejoRepository.preload({
+    const PlanManejo = await this.planManejoRepository.preload({
       id,
       ...updatePlanManejoDto,
     });
-    if(planManejo){
+    if(!PlanManejo){
       throw new NotFoundException(`Plan manejo con id ${id} no existe`);
     }
   }
 
   async remove(id: string) {
-    const planManejo = await this.findOne(id) ;
-    await this.planManejoRepository.remove(planManejo);
+    const PlanManejo = await this.findOne(id) ;
+    await this.planManejoRepository.remove(PlanManejo);
     return 'La actividad fue ejecutada correctamente';
   }
 }
