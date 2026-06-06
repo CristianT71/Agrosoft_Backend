@@ -11,6 +11,7 @@ import { CultivoReal } from './cultivo_real/entities/cultivo_real.entity';
 import { Insumo } from './insumo/entities/insumo.entity';
 import { Reporte } from './reporte/entities/reporte.entity';
 import { Venta } from './venta/entities/venta.entity';
+import { PlanManejo } from './plan_manejo/entities/plan_manejo.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -36,7 +37,8 @@ import { ConfigModule } from '@nestjs/config';
     CultivoReal,
     Insumo,
     Reporte,
-    Venta
+    Venta,
+    PlanManejo,
 
   ],
   controllers: [],
