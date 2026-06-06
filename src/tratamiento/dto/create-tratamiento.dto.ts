@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsDate, IsNotEmpty } from 'class-validator';
+import { IsString, IsNumber, IsDateString, IsNotEmpty } from 'class-validator';
 export class CreateTratamientoDto {
 
 @IsString()
