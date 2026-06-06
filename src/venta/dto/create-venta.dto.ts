@@ -26,8 +26,4 @@ export class CreateVentaDto {
     @IsNotEmpty()
     estado_pago: string;
 
-    @IsUUID()
-    @IsNotEmpty()
-    ReporteId:string;
-
 }
