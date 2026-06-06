@@ -5,6 +5,8 @@ import { IncidenciaModule } from './incidencia/incidencia.module';
 import { CosechaModule } from './cosecha/cosecha.module';
 import { CultivoBaseModule } from './cultivo_base/cultivo_base.module';
 import { EvidenciaModule } from './evidencia/evidencia.module';
+import { TipoIncidencia } from './tipo-incidencia/entities/tipo-incidencia.entity';
+import { Rol } from './rol/entities/rol.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -24,7 +26,9 @@ import { ConfigModule } from '@nestjs/config';
     IncidenciaModule,
     CosechaModule,
     CultivoBaseModule,
-    EvidenciaModule
+    EvidenciaModule,
+    TipoIncidencia,
+    Rol,
   ],
   controllers: [],
   providers: [],
