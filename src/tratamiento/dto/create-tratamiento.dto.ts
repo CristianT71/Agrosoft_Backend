@@ -13,9 +13,9 @@ orden: number;
 @IsNotEmpty()
 tipo_tratamiento: string;
 
-@IsDate()
+@IsDateString()
 @IsNotEmpty()
-fecha_aplicacion_sugerida: Date;
+fecha_aplicacion_sugerida: string;
 
 @IsString()
 @IsNotEmpty()
