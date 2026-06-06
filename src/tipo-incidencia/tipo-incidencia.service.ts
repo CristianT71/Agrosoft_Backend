@@ -35,11 +35,18 @@ export class TipoIncidenciaService {
 
   async update(id: string, updateTipoIncidenciaDto: UpdateTipoIncidenciaDto) {
     const tipoIncidencia = await this.tipoIncidenciaRepository.preload({
-      id, ...updateTipoIncidenciaDto,
+      id,
+      ...updateTipoIncidenciaDto,
     });
-    if(tipoIncidencia) {
-      throw new NotFoundException('Tipo incidencia con el id ${id} no encontrado')
-  }
+    if (!tipoIncidencia) {
+      throw new NotFoundException(`Tipo incidencia con id ${id} no existe`);
+    }
+
+    try {
+      return await this.tipoIncidenciaRepository.save(tipoIncidencia);
+    } catch (error) {
+      throw new InternalServerErrorException('Error: no se pudo actualizar tipo incidencia');
+    }
   }
   async remove(id: string) {
     const tipoIncidencia = await this.findOne(id);
