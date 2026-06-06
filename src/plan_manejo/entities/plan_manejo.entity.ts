@@ -8,18 +8,18 @@ export class PlanManejo {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'string' })
+    @Column({ type: 'varchar' })
     actividad_sugerida: string;
 
     @Column({type: 'int'})
     orden: number;
 
-    @Column({type: 'string' })
+    @Column({type: 'varchar' })
     tiempo_sugerido: string;
 
     @Column({ type: 'decimal' })
     cantidad_sugerida: number;
 
-    @Column({ type: 'string' })
+    @Column({ type: 'varchar' })
     unidad_medida: string;
 }

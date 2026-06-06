@@ -5,12 +5,12 @@ export class Rol {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({type: 'string'})
+  @Column({type: 'varchar'})
   nombre: string;
   
-  @Column({type: 'string'})
+  @Column({type: 'varchar'})
   descripcion: string;
   
-  @Column({type: 'string'})
+  @Column({type: 'varchar'})
   estado: string;
 }
