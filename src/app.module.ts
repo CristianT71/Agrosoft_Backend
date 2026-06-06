@@ -5,16 +5,16 @@ import { IncidenciaModule } from './incidencia/incidencia.module';
 import { CosechaModule } from './cosecha/cosecha.module';
 import { CultivoBaseModule } from './cultivo_base/cultivo_base.module';
 import { EvidenciaModule } from './evidencia/evidencia.module';
-import { TipoIncidencia } from './tipo-incidencia/entities/tipo-incidencia.entity';
-import { Rol } from './rol/entities/rol.entity';
-import { CultivoReal } from './cultivo_real/entities/cultivo_real.entity';
-import { Insumo } from './insumo/entities/insumo.entity';
-import { Reporte } from './reporte/entities/reporte.entity';
-import { Venta } from './venta/entities/venta.entity';
-import { PlanManejo } from './plan_manejo/entities/plan_manejo.entity';
-import { AccionCorrectiva } from './accion_correctiva/entities/accion_correctiva.entity';
-import { AccionEjecutada } from './accion_ejecutada/entities/accion_ejecutada.entity';
-import { Tratamiento } from './tratamiento/entities/tratamiento.entity';
+import { TipoIncidenciaModule } from './tipo-incidencia/tipo-incidencia.module';
+import { RolModule } from './rol/rol.module';
+import { CultivoRealModule } from './cultivo_real/cultivo_real.module';
+import { InsumoModule } from './insumo/insumo.module';
+import { ReporteModule } from './reporte/reporte.module';
+import { VentaModule } from './venta/venta.module';
+import { PlanManejoModule } from './plan_manejo/plan_manejo.module';
+import { AccionCorrectivaModule } from './accion_correctiva/accion_correctiva.module';
+import { AccionEjecutadaModule } from './accion_ejecutada/accion_ejecutada.module';
+import { TratamientoModule } from './tratamiento/tratamiento.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -35,16 +35,16 @@ import { ConfigModule } from '@nestjs/config';
     CosechaModule,
     CultivoBaseModule,
     EvidenciaModule,
-    TipoIncidencia,
-    Rol,
-    CultivoReal,
-    Insumo,
-    Reporte,
-    Venta,
-    PlanManejo,
-    AccionCorrectiva,
-    AccionEjecutada,
-    Tratamiento
+    TipoIncidenciaModule,
+    RolModule,
+    CultivoRealModule,
+    InsumoModule,
+    ReporteModule,
+    VentaModule,
+    PlanManejoModule,
+    AccionCorrectivaModule,
+    AccionEjecutadaModule,
+    TratamientoModule
   ],
   controllers: [],
   providers: [],
