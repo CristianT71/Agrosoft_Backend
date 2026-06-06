@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Decimal128 } from "typeorm/browser";
 
 @Entity()
 export class Insumo {

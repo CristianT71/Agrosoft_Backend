@@ -3,7 +3,7 @@ import { CreatePlanManejoDto } from './dto/create-plan_manejo.dto';
 import { UpdatePlanManejoDto } from './dto/update-plan_manejo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PlanManejo } from './entities/plan_manejo.entity';
-import { Repository } from 'typeorm/browser';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PlanManejoService {
