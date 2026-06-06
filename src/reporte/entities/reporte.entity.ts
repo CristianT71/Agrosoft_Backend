@@ -1,8 +1,9 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Venta } from "../../venta/entities/venta.entity";
 
 @Entity()
 export class Reporte {
+    @PrimaryGeneratedColumn('uuid')
     id:string;
 
     @Column()
