@@ -27,7 +27,7 @@ export class ReporteService {
       ...datosReporte,
       venta,
       });
-    return await this.ReporteRepository.save(venta);
+    return await this.ReporteRepository.save(Reporte);
     }catch (error){
       console.log(error);
       throw new InternalServerErrorException(`error al registrar el reporte`)
