@@ -40,8 +40,15 @@ export class PlanManejoService {
       id,
       ...updatePlanManejoDto,
     });
-    if(planManejo){
+    if (!planManejo) {
       throw new NotFoundException(`Plan manejo con id ${id} no existe`);
+    }
+
+    try {
+      return await this.planManejoRepository.save(planManejo);
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Error: no se pudo actualizar el Plan de Manejo');
     }
   }
 
