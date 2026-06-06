@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/usuario.module';
 import { IncidenciaModule } from './incidencia/incidencia.module';
 import { CosechaModule } from './cosecha/cosecha.module';
 import { CultivoBaseModule } from './cultivo_base/cultivo_base.module';
+import { EvidenciaModule } from './evidencia/evidencia.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CultivoBaseModule } from './cultivo_base/cultivo_base.module';
     IncidenciaModule,
     CosechaModule,
     CultivoBaseModule,
+    EvidenciaModule
   ],
   controllers: [],
   providers: [],
