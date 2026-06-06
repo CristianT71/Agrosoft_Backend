@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:16
@@ -10,3 +12,4 @@ services:
     container_name: Agrosoft_DB
     volumes:
       - ./postgres:/var/lib/postgresql/data
+      

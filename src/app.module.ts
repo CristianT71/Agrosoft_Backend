@@ -12,6 +12,9 @@ import { Insumo } from './insumo/entities/insumo.entity';
 import { Reporte } from './reporte/entities/reporte.entity';
 import { Venta } from './venta/entities/venta.entity';
 import { PlanManejo } from './plan_manejo/entities/plan_manejo.entity';
+import { AccionCorrectiva } from './accion_correctiva/entities/accion_correctiva.entity';
+import { AccionEjecutada } from './accion_ejecutada/entities/accion_ejecutada.entity';
+import { Tratamiento } from './tratamiento/entities/tratamiento.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -39,7 +42,9 @@ import { ConfigModule } from '@nestjs/config';
     Reporte,
     Venta,
     PlanManejo,
-
+    AccionCorrectiva,
+    AccionEjecutada,
+    Tratamiento
   ],
   controllers: [],
   providers: [],
