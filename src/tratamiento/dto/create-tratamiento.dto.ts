@@ -1,4 +1,6 @@
-import { IsString, IsNumber, IsDate, IsNotEmpty } from 'class-validator';
+
+import { IsString, IsNumber, IsNotEmpty, IsDateString } from 'class-validator';
+
 export class CreateTratamientoDto {
 
 @IsString()
@@ -13,7 +15,7 @@ orden: number;
 @IsNotEmpty()
 tipo_tratamiento: string;
 
-@IsDate()
+@IsDateString()
 @IsNotEmpty()
 fecha_aplicacion_sugerida: Date;
 
