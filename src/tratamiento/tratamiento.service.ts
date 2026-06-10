@@ -4,6 +4,8 @@ import { UpdateTratamientoDto } from './dto/update-tratamiento.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tratamiento } from './entities/tratamiento.entity';
+import { PlanManejoService } from '../plan_manejo/plan_manejo.service';
+import { InsumoService } from '../insumo/insumo.service';
 
 
 @Injectable()
@@ -12,6 +14,8 @@ export class TratamientoService {
   constructor(
     @InjectRepository(Tratamiento)
     private readonly tratamientoRepository: Repository<Tratamiento>,
+    private readonly planManejoService: PlanManejoService,
+    private readonly insumoService: InsumoService,
   ){}
 
   async create(createTratamientoDto: CreateTratamientoDto) {
