@@ -1,4 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { OneToMany } from "typeorm";
+import { Tratamiento } from "../../tratamiento/entities/tratamiento.entity";
 
 @Entity()
 export class Insumo {
@@ -7,15 +9,22 @@ export class Insumo {
 
     @Column()
     nombre: string;
+
     @Column()
     categoria: string;
+
     @Column()
     unidad_medida: string;
+
     @Column()
     cantidad_disponible: string;
+
     @Column()
     precio_unitario: string;
+
     @Column()
     estado: string;
 
+    @OneToMany(() => Tratamiento, tratamiento => tratamiento.insumos)
+    tratamientos: Tratamiento[];
 }

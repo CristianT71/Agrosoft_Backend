@@ -1,6 +1,7 @@
 
 import { Column, Entity, JoinColumn,ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import {PlanManejo} from '../../plan_manejo/entities/plan_manejo.entity';
+import { Insumo } from '../../insumo/entities/insumo.entity';
 
 @Entity()
 export class Tratamiento {
@@ -28,4 +29,8 @@ cantidad_sugerida: number;
 @ManyToOne(() => PlanManejo, plan_manejo => plan_manejo.tratamientos)
 @JoinColumn({name: 'plan_manejo_id'})
 planesManejo: PlanManejo[];
+
+@ManyToOne(() => Insumo, insumo => insumo.tratamientos)
+@JoinColumn({name: 'insumo_id'})
+insumos: Insumo[];
 }
