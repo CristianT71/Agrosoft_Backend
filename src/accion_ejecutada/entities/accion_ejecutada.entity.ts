@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Usuario } from '../../usuario/entities/usuario.entity';
+import { CultivoReal } from '../../cultivo_real/entities/cultivo_real.entity';
 
 @Entity('accion_ejecutada')
 export class AccionEjecutada {
@@ -18,6 +20,13 @@ costo_aplicado: number;
 @Column({type: 'varchar', length: 255})
 observaciones: string;
 
+@ManyToOne(() => Usuario, usuario => usuario.accionesEjecutadas)
+@JoinColumn({name: 'usuario_id'})
+usuario: Usuario;
+
+@ManyToOne(() => CultivoReal, cultivoReal => cultivoReal.accionesEjecutadas)
+@JoinColumn({name: 'cultivo_real_id'})
+cultivoReal: CultivoReal;
 }
 
 
