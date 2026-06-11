@@ -4,27 +4,27 @@ import { Tratamiento } from "../../tratamiento/entities/tratamiento.entity";
 
 @Entity()
 export class Insumo {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+@PrimaryGeneratedColumn('uuid')
+id: string;
 
-    @Column()
-    nombre: string;
+@Column()
+nombre: string;
 
-    @Column()
-    categoria: string;
+@Column()
+categoria: string;
 
-    @Column()
-    unidad_medida: string;
+@Column()
+unidad_medida: string;
 
-    @Column()
-    cantidad_disponible: string;
+@Column()
+cantidad_disponible: string;
 
-    @Column()
-    precio_unitario: string;
+@Column()
+precio_unitario: string;
 
-    @Column()
-    estado: string;
+@Column()
+estado: string;
 
-    @OneToMany(() => Tratamiento, tratamiento => tratamiento.insumos)
-    tratamientos: Tratamiento[];
+@OneToMany(() => Tratamiento, tratamiento => tratamiento.insumos)
+tratamientos: Tratamiento[];
 }

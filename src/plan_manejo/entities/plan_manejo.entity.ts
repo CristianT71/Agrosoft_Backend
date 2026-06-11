@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { OneToMany } from "typeorm";
 import { Tratamiento } from "../../tratamiento/entities/tratamiento.entity";    
+import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
 
 
 @Entity()
@@ -27,4 +28,7 @@ unidad_medida: string;
 
 @OneToMany(() => Tratamiento, tratamiento => tratamiento.planesManejo)
 tratamientos: Tratamiento[];
+
+@OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.planManejo)
+accionCorrectiva: AccionCorrectiva[];
 }
