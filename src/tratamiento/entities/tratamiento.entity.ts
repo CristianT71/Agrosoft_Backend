@@ -1,26 +1,31 @@
 
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn,ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {PlanManejo} from '../../plan_manejo/entities/plan_manejo.entity';
 
 @Entity()
 export class Tratamiento {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+@PrimaryGeneratedColumn('uuid')
+id: string;
 
-    @Column({type: 'varchar', length: 255})
-    actividad_sugerida: string;
+@Column({type: 'varchar', length: 255})
+actividad_sugerida: string;
 
-    @Column({type: 'int'})
-    orden: number;
+@Column({type: 'int'})
+orden: number;
 
-    @Column({type: 'varchar', length: 255})
-    tipo_tratatmiento: string;
+@Column({type: 'varchar', length: 255})
+tipo_tratatmiento: string;
 
-    @Column({type:'date'})
-    fecha_aplicacion_sugerida: Date;
+@Column({type:'date'})
+fecha_aplicacion_sugerida: Date;
 
-    @Column({type: 'varchar', length: 255})
-    descripcion: string;
+@Column({type: 'varchar', length: 255})
+descripcion: string;
 
-    @Column({type:'decimal'})
-    cantidad_sugerida: number;
+@Column({type:'decimal'})
+cantidad_sugerida: number;
+
+@ManyToOne(() => PlanManejo, plan_manejo => plan_manejo.tratamientos)
+@JoinColumn({name: 'plan_manejo_id'})
+planesManejo: PlanManejo[];
 }

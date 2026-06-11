@@ -1,25 +1,30 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { OneToMany } from "typeorm";
+import { Tratamiento } from "../../tratamiento/entities/tratamiento.entity";    
 
 
 @Entity()
 
 export class PlanManejo {
-    
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
 
-    @Column({ type: 'varchar' })
-    actividad_sugerida: string;
+@PrimaryGeneratedColumn('uuid')
+id: string;
 
-    @Column({type: 'int'})
-    orden: number;
+@Column({ type: 'varchar' })
+actividad_sugerida: string;
 
-    @Column({type: 'varchar' })
-    tiempo_sugerido: string;
+@Column({type: 'int'})
+orden: number;
 
-    @Column({ type: 'decimal' })
-    cantidad_sugerida: number;
+@Column({type: 'varchar' })
+tiempo_sugerido: string;
 
-    @Column({ type: 'varchar' })
-    unidad_medida: string;
+@Column({ type: 'decimal' })
+cantidad_sugerida: number;
+
+@Column({ type: 'varchar' })
+unidad_medida: string;
+
+@OneToMany(() => Tratamiento, tratamiento => tratamiento.planesManejo)
+tratamientos: Tratamiento[];
 }
