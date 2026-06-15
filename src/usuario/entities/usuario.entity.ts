@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 import { AccionEjecutada } from "../../accion_ejecutada/entities/accion_ejecutada.entity";
+import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
 
 @Entity()
 export class Usuario {
@@ -34,4 +35,7 @@ export class Usuario {
 
     @OneToMany(() => AccionEjecutada, (accion) => accion.usuario )
     accionesEjecutadas: AccionEjecutada[];
+
+    @OneToMany(() => AccionCorrectiva, (accionCorrectiva) => accionCorrectiva.usuario )
+    accionCorrectiva: AccionCorrectiva[];
 }
