@@ -8,6 +8,7 @@ import { PlanManejo } from './entities/plan_manejo.entity';
   controllers: [PlanManejoController],
   providers: [PlanManejoService],
   imports:
-  [TypeOrmModule.forFeature([PlanManejo])]
+  [TypeOrmModule.forFeature([PlanManejo])],
+  exports: [PlanManejoService]
 })
 export class PlanManejoModule {}

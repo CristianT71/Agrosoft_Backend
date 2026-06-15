@@ -10,6 +10,7 @@ import { Usuario } from '../usuario/entities/usuario.entity';
   providers: [IncidenciaService],
   imports: [
     TypeOrmModule.forFeature([ Incidencia, Usuario ])
-  ]
+  ],
+  exports: [IncidenciaService]
 })
 export class IncidenciaModule {}

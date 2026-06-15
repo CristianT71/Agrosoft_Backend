@@ -11,6 +11,7 @@ import { Incidencia } from '../incidencia/entities/incidencia.entity';
   providers: [UsuarioService],
   imports: [
     TypeOrmModule.forFeature([ Usuario, Cosecha, Incidencia ])
-  ]
+  ],
+  exports: [UsuarioService]
 })
 export class UsuarioModule {}
