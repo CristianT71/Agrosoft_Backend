@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "../../usuario/entities/usuario.entity";
+import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
 
 @Entity()
 export class Incidencia {
@@ -23,4 +24,7 @@ export class Incidencia {
 
     @ManyToOne(() => Usuario, (usuario) => usuario.incidencias, { onDelete: 'CASCADE' })
     usuario: Usuario;
+
+    @OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.incidencia)
+    accionCorrectiva: AccionCorrectiva[];
 }

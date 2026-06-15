@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm"
 import { PlanManejo } from "../../plan_manejo/entities/plan_manejo.entity";
 import { Insumo } from "../../insumo/entities/insumo.entity";
+import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 
 @Entity('accion_correctiva')
 export class AccionCorrectiva {
@@ -26,5 +27,9 @@ resultado_preeliminar: string;
 @ManyToOne (() => Insumo, Insumo => Insumo.accionCorrectiva)
 @JoinColumn({name: 'insumo_id'})
 insumo: Insumo;
+
+@ManyToOne(() => Incidencia, Incidencia => Incidencia.accionCorrectiva)
+@JoinColumn({name: 'incidencia_id'})
+incidencia: Incidencia;
 
 }
