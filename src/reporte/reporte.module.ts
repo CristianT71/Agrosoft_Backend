@@ -9,12 +9,8 @@ import { VentaModule } from '../venta/venta.module';
   controllers: [ReporteController],
   providers: [ReporteService],
   imports:[
-<<<<<<< HEAD
     TypeOrmModule.forFeature([ Reporte ]),
     VentaModule,
-=======
-    TypeOrmModule.forFeature([Reporte, Venta])
->>>>>>> 54820d12dc144e1117e8a6333f5eab21943bcf6a
   ]
 })
 export class ReporteModule {}
