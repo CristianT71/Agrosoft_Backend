@@ -1,6 +1,7 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
+import { Rol } from "../../rol/entities/rol.entity";
 
 @Entity()
 export class Usuario {
@@ -28,6 +29,9 @@ export class Usuario {
     @OneToMany(() => Cosecha, (cosecha) => cosecha.usuario )
     cosechas: Cosecha[];
 
-    @OneToMany(() => Incidencia, (incidencia) => incidencia.usuario )
+    @OneToMany(() => Incidencia, (incidencia) => incidencia.usuarios )
     incidencias: Incidencia[];
+
+    @ManyToOne(() => Rol, (rol) => rol.usuarios)
+    rol: Rol;
 }

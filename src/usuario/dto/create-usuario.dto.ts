@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, IsUUID, MaxLength, MinLength } from "class-validator";
+import { UUID } from "typeorm/driver/mongodb/bson.typings.js";
 
 export class CreateUsuarioDto {
     
@@ -25,4 +26,8 @@ export class CreateUsuarioDto {
     @IsOptional()
     @MaxLength(20)
     telefono?: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    rolId: string;
 }

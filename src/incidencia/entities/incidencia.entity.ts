@@ -23,4 +23,5 @@ export class Incidencia {
 
     @ManyToOne(() => Usuario, (usuario) => usuario.incidencias, { onDelete: 'CASCADE' })
     usuario: Usuario;
+    usuarios: any;
 }

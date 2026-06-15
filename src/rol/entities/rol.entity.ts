@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Entity()
 export class Rol {
@@ -13,4 +14,9 @@ export class Rol {
   
   @Column({type: 'varchar'})
   estado: string;
+
+
+  //Relacion con usuario
+  @OneToMany(() => Usuario, (usuario) => usuario.rol)
+  usuarios: Usuario[];
 }
