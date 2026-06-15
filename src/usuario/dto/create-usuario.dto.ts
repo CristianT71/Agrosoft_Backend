@@ -25,4 +25,6 @@ export class CreateUsuarioDto {
     @IsOptional()
     @MaxLength(20)
     telefono?: string;
+
+    
 }

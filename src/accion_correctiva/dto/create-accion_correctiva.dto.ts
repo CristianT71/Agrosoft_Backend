@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from "class-validator";
 
 export class CreateAccionCorrectivaDto {
 
@@ -20,4 +20,17 @@ costo_aplicado: number;
 @IsString()
 @IsNotEmpty()
 resultado_preeliminar: string;
+
+@IsUUID()
+@IsNotEmpty()
+id_insumo: string;
+
+@IsUUID()
+@IsNotEmpty()
+id_incidencia: string;
+
+@IsUUID()
+@IsNotEmpty()
+id_usuario: string;
+
 }

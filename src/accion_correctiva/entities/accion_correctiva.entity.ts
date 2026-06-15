@@ -3,7 +3,6 @@ import { PlanManejo } from "../../plan_manejo/entities/plan_manejo.entity";
 import { Insumo } from "../../insumo/entities/insumo.entity";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 import { Usuario } from "../../usuario/entities/usuario.entity";
-import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Entity('accion_correctiva')
 export class AccionCorrectiva {
