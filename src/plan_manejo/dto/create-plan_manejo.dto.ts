@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from "class-validator";
 
 export class CreatePlanManejoDto {
 
@@ -21,4 +21,8 @@ export class CreatePlanManejoDto {
     @IsString()
     @IsNotEmpty()
     unidad_medida: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    cultivoBaseId: string;
 }

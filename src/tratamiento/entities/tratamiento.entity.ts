@@ -27,5 +27,5 @@ export class Tratamiento {
 
     //Estas son las relaciones => Plan de manejo "De una A muchas" Tratamientos
     @ManyToOne(() => PlanManejo, (planManejo) => planManejo.tratamientos)
-    PlanManejo: PlanManejo;
+    planManejo: PlanManejo;
 }

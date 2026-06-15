@@ -23,19 +23,11 @@ export class ReporteService {
       throw new NotFoundException(`venta con id ${ventaId} No existe`)
     }
     try{
-<<<<<<< HEAD
       const Reporte = this.reporteRepository.create({
       ...datosReporte,
       venta,
       });
     return await this.reporteRepository.save(Reporte);
-=======
-      const Reporte = this.ReporteRepository.create({
-      ...datosReporte,
-      venta,
-      });
-    return await this.ReporteRepository.save(Reporte);
->>>>>>> 54820d12dc144e1117e8a6333f5eab21943bcf6a
     }catch (error){
       console.log(error);
       throw new InternalServerErrorException(`error al registrar el reporte`)
@@ -43,19 +35,11 @@ export class ReporteService {
   }
 
   async findAll() {
-<<<<<<< HEAD
     return await this.reporteRepository.find()
   }
 
   async findOne(id: string) {
     const Reporte = await this.reporteRepository.findOneBy({id});
-=======
-    return await this.ReporteRepository.find()
-  }
-
-  async findOne(id: string) {
-    const Reporte = await this.ReporteRepository.findOneBy({id});
->>>>>>> 54820d12dc144e1117e8a6333f5eab21943bcf6a
     if(!Reporte){
       throw new NotFoundException (`Reporte con id ${id} no existe`)
     }
@@ -63,11 +47,7 @@ export class ReporteService {
   }
 
   async update(id: string, updateReporteDto: UpdateReporteDto) {
-<<<<<<< HEAD
     const Reporte = await this.reporteRepository.preload({
-=======
-    const Reporte = await this.ReporteRepository.preload({
->>>>>>> 54820d12dc144e1117e8a6333f5eab21943bcf6a
       id,
       ...updateReporteDto
     });
@@ -75,11 +55,7 @@ export class ReporteService {
       throw new NotFoundException(`Reporte con id ${id} no existe`);
     }
     try{
-<<<<<<< HEAD
       await this.reporteRepository.save(Reporte);
-=======
-      await this.ReporteRepository.save(Reporte);
->>>>>>> 54820d12dc144e1117e8a6333f5eab21943bcf6a
       return Reporte
     }catch(error){
       console.log(error);
@@ -89,11 +65,7 @@ export class ReporteService {
 
   async remove(id: string) {
     const Reporte = await this.findOne(id);
-<<<<<<< HEAD
     await this.reporteRepository.remove(Reporte);
-=======
-    await this.ReporteRepository.remove(Reporte);
->>>>>>> 54820d12dc144e1117e8a6333f5eab21943bcf6a
     return `Reporte eliminado exitosamente`;
   }
 }

@@ -25,10 +25,10 @@ export class PlanManejo {
     unidad_medida: string;
 
     //Estas son las relaciones =>Cultivo base "De una A muchas" Plan de manejo
-    @ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.PlanManejo)
+    @ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.planManejo)
     cultivoBase: CultivoBase;
 
     //Estas son las relaciones => Plan de manejo "De una A muchas" Tratamientos
-    @OneToMany(() => Tratamiento, (Tratamiento) => Tratamiento.PlanManejo)
+    @OneToMany(() => Tratamiento, (Tratamiento) => Tratamiento.planManejo)
     tratamientos: Tratamiento[];
 }

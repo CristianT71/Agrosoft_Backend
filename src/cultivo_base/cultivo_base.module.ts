@@ -9,6 +9,7 @@ import { CultivoBase } from './entities/cultivo_base.entity';
   providers: [CultivoBaseService],
   imports: [
     TypeOrmModule.forFeature([ CultivoBase ])
-  ]
+  ],
+  exports: [TypeOrmModule]
 })
 export class CultivoBaseModule {}

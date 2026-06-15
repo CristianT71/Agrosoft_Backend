@@ -20,6 +20,6 @@ export class CultivoBase {
 
     //Relaciones que les pongo
     @OneToMany(() => PlanManejo, (PlanManejo) => PlanManejo.cultivoBase)
-    PlanManejo: PlanManejo[];
+    planManejo: PlanManejo[];
 
 }
