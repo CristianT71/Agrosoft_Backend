@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm"
 import { PlanManejo } from "../../plan_manejo/entities/plan_manejo.entity";
+import { Insumo } from "../../insumo/entities/insumo.entity";
 
 @Entity('accion_correctiva')
 export class AccionCorrectiva {
@@ -22,5 +23,8 @@ costo_aplicado: number;
 @Column({type: 'varchar', length: 255})
 resultado_preeliminar: string;
 
+@ManyToOne (() => Insumo, Insumo => Insumo.accionCorrectiva)
+@JoinColumn({name: 'insumo_id'})
+insumo: Insumo;
 
 }
