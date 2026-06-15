@@ -22,8 +22,5 @@ costo_aplicado: number;
 @Column({type: 'varchar', length: 255})
 resultado_preeliminar: string;
 
-@ManyToOne (() => PlanManejo, planManejo => planManejo.accionCorrectiva)
-@JoinColumn({name: 'plan_manejo_id'})
-planManejo: PlanManejo;
 
 }

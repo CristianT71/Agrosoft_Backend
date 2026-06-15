@@ -29,6 +29,5 @@ unidad_medida: string;
 @OneToMany(() => Tratamiento, tratamiento => tratamiento.planesManejo)
 tratamientos: Tratamiento[];
 
-@OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.planManejo)
-accionCorrectiva: AccionCorrectiva[];
+
 }
