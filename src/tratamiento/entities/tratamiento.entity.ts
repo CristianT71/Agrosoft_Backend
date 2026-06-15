@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { PlanManejo } from '../../plan_manejo/entities/plan_manejo.entity';
 
 @Entity()
 export class Tratamiento {
@@ -23,4 +24,8 @@ export class Tratamiento {
 
     @Column({type:'decimal'})
     cantidad_sugerida: number;
+
+    //Estas son las relaciones => Plan de manejo "De una A muchas" Tratamientos
+    @ManyToOne(() => PlanManejo, (planManejo) => planManejo.tratamientos)
+    PlanManejo: PlanManejo;
 }

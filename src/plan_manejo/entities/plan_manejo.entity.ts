@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CultivoBase } from "../../cultivo_base/entities/cultivo_base.entity";
+import { Tratamiento } from "../../tratamiento/entities/tratamiento.entity";
 
 @Entity()
 
@@ -22,4 +23,12 @@ export class PlanManejo {
 
     @Column({ type: 'varchar' })
     unidad_medida: string;
+
+    //Estas son las relaciones =>Cultivo base "De una A muchas" Plan de manejo
+    @ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.PlanManejo)
+    cultivoBase: CultivoBase;
+
+    //Estas son las relaciones => Plan de manejo "De una A muchas" Tratamientos
+    @OneToMany(() => Tratamiento, (Tratamiento) => Tratamiento.PlanManejo)
+    tratamientos: Tratamiento[];
 }
