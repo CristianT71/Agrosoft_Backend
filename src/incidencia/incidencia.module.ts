@@ -4,6 +4,7 @@ import { IncidenciaController } from './incidencia.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Incidencia } from './entities/incidencia.entity';
 import { UsuarioModule } from '../usuario/usuario.module';
+import { CultivoRealModule } from '../cultivo_real/cultivo_real.module';
 
 @Module({
   controllers: [IncidenciaController],
@@ -11,6 +12,8 @@ import { UsuarioModule } from '../usuario/usuario.module';
   imports: [
     TypeOrmModule.forFeature([ Incidencia ]),
     UsuarioModule,
-  ]
+    CultivoRealModule,
+  ],
+  exports: [TypeOrmModule]
 })
 export class IncidenciaModule {}

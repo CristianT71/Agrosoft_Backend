@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "../../usuario/entities/usuario.entity";
+import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
 
 @Entity()
 export class Incidencia {
@@ -23,4 +24,7 @@ export class Incidencia {
 
     @ManyToOne(() => Usuario, (usuario) => usuario.incidencias, { onDelete: 'CASCADE' })
     usuario: Usuario;
+
+    @ManyToOne(() => CultivoReal, (cultivoReal) => cultivoReal.incidencias)
+    cultivoReal: CultivoReal;
 }

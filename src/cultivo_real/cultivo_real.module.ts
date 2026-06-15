@@ -9,6 +9,7 @@ import { CultivoReal } from './entities/cultivo_real.entity';
   providers: [CultivoRealService],
   imports:[
     TypeOrmModule.forFeature([CultivoReal])
-  ]
+  ],
+  exports: [TypeOrmModule]
 })
 export class CultivoRealModule {}

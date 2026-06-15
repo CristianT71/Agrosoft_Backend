@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 
 @Entity()
 export class CultivoReal {
@@ -13,4 +14,8 @@ export class CultivoReal {
 
     @Column()
     estado: string;
+    
+    //Relaciones
+    @OneToMany(() => Incidencia, (incidencia) => incidencia.cultivoReal)
+    incidencias: Incidencia[];
 }
