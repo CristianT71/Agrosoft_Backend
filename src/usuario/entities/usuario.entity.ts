@@ -29,7 +29,7 @@ export class Usuario {
     @OneToMany(() => Cosecha, (cosecha) => cosecha.usuario )
     cosechas: Cosecha[];
 
-    @OneToMany(() => Incidencia, (incidencia) => incidencia.usuarios )
+    @OneToMany(() => Incidencia, (incidencia) => incidencia.usuario )
     incidencias: Incidencia[];
 
     @ManyToOne(() => Rol, (rol) => rol.usuarios)
