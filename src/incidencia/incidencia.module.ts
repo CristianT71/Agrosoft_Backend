@@ -3,13 +3,14 @@ import { IncidenciaService } from './incidencia.service';
 import { IncidenciaController } from './incidencia.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Incidencia } from './entities/incidencia.entity';
-import { Usuario } from '../usuario/entities/usuario.entity';
+import { UsuarioModule } from '../usuario/usuario.module';
 
 @Module({
   controllers: [IncidenciaController],
   providers: [IncidenciaService],
   imports: [
-    TypeOrmModule.forFeature([ Incidencia, Usuario ])
+    TypeOrmModule.forFeature([ Incidencia ]),
+    UsuarioModule,
   ]
 })
 export class IncidenciaModule {}

@@ -10,8 +10,7 @@ export class VentaService {
 
   constructor(
     @InjectRepository (Venta)
-    private readonly VentaRepository:
-    Repository<Venta>,
+    private readonly VentaRepository:Repository<Venta>,
   ){}
 
   async create(createVentaDto: CreateVentaDto) {

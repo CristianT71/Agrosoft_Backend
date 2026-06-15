@@ -26,6 +26,5 @@ export class Venta {
     estado_pago: string;
     
     @OneToMany(() => Reporte, (reporte) => reporte.venta)
-    reporte: Reporte
-    reportes: any;
+    reportes: Reporte[];
 }
