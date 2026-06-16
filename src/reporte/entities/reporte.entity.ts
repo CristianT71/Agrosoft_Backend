@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Venta } from "../../venta/entities/venta.entity";
+import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 
 @Entity()
 export class Reporte {
@@ -18,4 +19,7 @@ export class Reporte {
 
     @ManyToOne(() => Venta, (venta) => venta.reportes, {onDelete :'CASCADE'})
     venta: Venta;
+
+    @ManyToOne(() => Cosecha, (cosecha) => cosecha.reportes)
+    cosecha: Cosecha;
 }

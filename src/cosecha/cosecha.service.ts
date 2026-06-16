@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Cosecha } from './entities/cosecha.entity';
 import { Repository } from 'typeorm';
 import { Usuario } from '../usuario/entities/usuario.entity';
+import { CultivoReal } from '../cultivo_real/entities/cultivo_real.entity';
 
 @Injectable()
 export class CosechaService {
@@ -13,21 +14,30 @@ export class CosechaService {
     private readonly cosechaRepository: Repository<Cosecha>,
 
     @InjectRepository(Usuario)
-    private readonly usuarioRepository: Repository<Usuario>
+    private readonly usuarioRepository: Repository<Usuario>,
+
+    @InjectRepository(CultivoReal)
+    private readonly cultivoRealRepository: Repository<CultivoReal>
   ){}
 
   async create(createCosechaDto: CreateCosechaDto) {
-    const { usuarioId, ...datosCosecha } = createCosechaDto; //extrae el id del usuaro
+    const { usuarioId, cultivoRealId,...datosCosecha } = createCosechaDto; //extrae el id del usuaro
 
     const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId });  //validar si usuario existe antes de registrar
     if (!usuario) {
       throw new NotFoundException(`Usuario con id ${usuarioId} no existe`)
     }
 
+    const cultivoReal = await this.cultivoRealRepository.findOneBy({ id: cultivoRealId });
+    if (!cultivoReal) {
+      throw new NotFoundException(`Cultivo con id ${cultivoRealId} no existe`)
+    }
+
     try {
       const cosecha = this.cosechaRepository.create({
         ...datosCosecha,
         usuario,
+        cultivoReal,
       });
       return await this.cosechaRepository.save(cosecha);
     } catch (error){

@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Reporte } from './entities/reporte.entity';
 import { Repository } from 'typeorm';
 import { Venta } from '../venta/entities/venta.entity';
+import { Cosecha } from '../cosecha/entities/cosecha.entity';
 
 @Injectable()
 export class ReporteService {
@@ -14,18 +15,29 @@ export class ReporteService {
     private readonly reporteRepository:Repository<Reporte>,
 
     @InjectRepository (Venta)
-    private readonly ventaRepository: Repository<Venta>
+    private readonly ventaRepository: Repository<Venta>,
+
+    @InjectRepository (Cosecha)
+    private readonly cosechaRepository: Repository<Cosecha>,
   ){}
   async create(createReporteDto: CreateReporteDto) {
-    const {ventaId, ...datosReporte} = createReporteDto;
+    const {ventaId, cosechaId, ...datosReporte} = createReporteDto;
+
     const venta = await this.ventaRepository.findOneBy({id: ventaId});
     if (!venta) {
       throw new NotFoundException(`venta con id ${ventaId} No existe`)
     }
+
+    const cosecha = await this.cosechaRepository.findOneBy({ id: cosechaId });
+    if (!cosecha) {
+      throw new NotFoundException(`Cosecha con id ${cosechaId} no existe`)
+    }
+
     try{
       const Reporte = this.reporteRepository.create({
       ...datosReporte,
       venta,
+      cosecha,
       });
     return await this.reporteRepository.save(Reporte);
     }catch (error){

@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 import { AccionEjecutada } from "../../accion_ejecutada/entities/accion_ejecutada.entity";
+import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 
 @Entity()
 export class CultivoReal {
@@ -22,4 +23,7 @@ export class CultivoReal {
 
     @OneToMany(() => AccionEjecutada, (accion) => accion.cultivoReal )
     accionesEjecutadas: AccionEjecutada[];
+
+    @OneToMany(() => Cosecha, (cosecha) => cosecha.cultivoReal)
+    cosechas: Cosecha[];
 }

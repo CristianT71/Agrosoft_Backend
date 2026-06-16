@@ -4,20 +4,32 @@ import { UpdateVentaDto } from './dto/update-venta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Venta } from './entities/venta.entity';
 import { Repository } from 'typeorm';
+import { Cosecha } from '../cosecha/entities/cosecha.entity';
 
 @Injectable()
 export class VentaService {
 
   constructor(
     @InjectRepository (Venta)
-    private readonly VentaRepository:Repository<Venta>,
+    private readonly ventaRepository:Repository<Venta>,
+
+    @InjectRepository (Cosecha)
+    private readonly cosechaRepository: Repository<Cosecha>,
   ){}
 
   async create(createVentaDto: CreateVentaDto) {
+    const {cosechaId, ...datosVenta} = createVentaDto;
+
+    const cosecha = await this.cosechaRepository.findOneBy({ id: cosechaId });
+    if (!cosecha) {
+      throw new NotFoundException(`Cosecha con id ${cosechaId} no existe`)
+    }
     try{
-      const Venta = this.VentaRepository.create
-      (createVentaDto);
-      await this.VentaRepository.save(Venta);
+      const venta = this.ventaRepository.create({
+        ...datosVenta,
+        cosecha,
+      });
+      return await this.ventaRepository.save(venta);
     }catch (error){
       console.log(error);
       throw new InternalServerErrorException(`error al registrar la venta `)
@@ -25,28 +37,28 @@ export class VentaService {
   }
 
   async findAll() {
-    return await this.VentaRepository.find()
+    return await this.ventaRepository.find()
   }
 
   async findOne(id: string) {
-    const Venta = await this.VentaRepository.findOneBy({id});
-    if(!Venta){
+    const venta = await this.ventaRepository.findOneBy({id});
+    if(!venta){
       throw new NotFoundException (`Venta con id ${id} no existe`)
     }
-    return Venta;
+    return venta;
   }
 
   async update(id: string, updateVentaDto: UpdateVentaDto) {
-    const Venta = await this.VentaRepository.preload({
+    const venta = await this.ventaRepository.preload({
       id,
       ...updateVentaDto
     });
-    if(!Venta){
+    if(!venta){
       throw new NotFoundException(`venta con id ${id} no existe`);
     }
     try{
-      await this.VentaRepository.save(Venta);
-      return Venta
+      await this.ventaRepository.save(venta);
+      return venta
     }catch(error){
       console.log(error);
       throw new InternalServerErrorException(`No se puede actualizar la venta`)
@@ -54,8 +66,8 @@ export class VentaService {
   }
 
   async remove(id: string) {
-    const Venta = await this.findOne(id);
-    await this.VentaRepository.remove(Venta);
+    const venta = await this.findOne(id);
+    await this.ventaRepository.remove(venta);
     return `la venta se elimino exitosamente`;
   }
 }

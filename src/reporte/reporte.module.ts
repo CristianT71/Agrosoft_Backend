@@ -4,6 +4,7 @@ import { ReporteController } from './reporte.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Reporte } from './entities/reporte.entity';
 import { VentaModule } from '../venta/venta.module';
+import { CosechaModule } from '../cosecha/cosecha.module';
 
 @Module({
   controllers: [ReporteController],
@@ -11,6 +12,8 @@ import { VentaModule } from '../venta/venta.module';
   imports:[
     TypeOrmModule.forFeature([ Reporte ]),
     VentaModule,
-  ]
+    CosechaModule,
+  ],
+  exports: [TypeOrmModule]
 })
 export class ReporteModule {}
