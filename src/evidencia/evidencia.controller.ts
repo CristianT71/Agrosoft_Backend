@@ -17,7 +17,7 @@ export class EvidenciaController {
   }
 
   @Get('incidencia/:idIncidencia')
-  obtenerPorIncidencia(@Param('idIncidencia', ParseIntPipe) idIncidencia: number) {
+  obtenerPorIncidencia(@Param('idIncidencia', ParseIntPipe) idIncidencia: string) {
     return this.evidenciaService.obtenerPorIncidencia(idIncidencia);
   }
 }
