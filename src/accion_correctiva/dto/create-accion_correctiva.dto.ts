@@ -23,14 +23,14 @@ resultado_preeliminar: string;
 
 @IsUUID()
 @IsNotEmpty()
-id_insumo: string;
+insumoId: string;
 
 @IsUUID()
 @IsNotEmpty()
-id_incidencia: string;
+incidenciaId: string;
 
 @IsUUID()
 @IsNotEmpty()
-id_usuario: string;
+usuarioId: string;
 
 }

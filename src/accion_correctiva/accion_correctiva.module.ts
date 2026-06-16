@@ -10,13 +10,12 @@ import { UsuarioModule } from '../usuario/usuario.module';
 @Module({
   controllers: [AccionCorrectivaController],
   providers: [accion_correctivaService],
-  exports: [accion_correctivaService],
-
   imports: [
     TypeOrmModule.forFeature([AccionCorrectiva]),
     InsumoModule,
     IncidenciaModule,
     UsuarioModule,
-  ]
+  ],
+  exports: [TypeOrmModule],
 })
 export class AccionCorrectivaModule {}

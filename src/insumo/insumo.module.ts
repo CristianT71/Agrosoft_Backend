@@ -10,6 +10,6 @@ import { Insumo } from './entities/insumo.entity';
   imports:[
     TypeOrmModule.forFeature([Insumo])
   ],
-  exports: [InsumoService]
+  exports: [TypeOrmModule]
 })
 export class InsumoModule {}
