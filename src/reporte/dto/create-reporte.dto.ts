@@ -21,5 +21,9 @@ export class CreateReporteDto {
     @IsUUID()
     @IsNotEmpty()
     cosechaId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    incidenciaId: string;
 }
 

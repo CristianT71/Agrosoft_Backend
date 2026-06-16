@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Venta } from "../../venta/entities/venta.entity";
 import { Cosecha } from "../../cosecha/entities/cosecha.entity";
+import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 
 @Entity()
 export class Reporte {
@@ -22,4 +23,7 @@ export class Reporte {
 
     @ManyToOne(() => Cosecha, (cosecha) => cosecha.reportes)
     cosecha: Cosecha;
+
+    @ManyToOne(() => Incidencia, (incidencia) => incidencia.reportes)
+    incidencia: Incidencia;
 }
