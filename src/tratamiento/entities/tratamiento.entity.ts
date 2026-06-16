@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { PlanManejo } from '../../plan_manejo/entities/plan_manejo.entity';
 import { Insumo } from '../../insumo/entities/insumo.entity';
 
@@ -28,8 +28,10 @@ cantidad_sugerida: number;
 
 //Estas son las relaciones => Plan de manejo "De una A muchas" Tratamientos
 @ManyToOne(() => PlanManejo, (planManejo) => planManejo.tratamientos)
+@JoinColumn({ name: 'plan_manejo_id' })
 planManejo: PlanManejo;
 
 @ManyToOne(() => Insumo, insumo => insumo.tratamientos)
+@JoinColumn({ name: 'insumo_id' })
 insumo: Insumo;
 }

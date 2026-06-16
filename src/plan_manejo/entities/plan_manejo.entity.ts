@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CultivoBase } from "../../cultivo_base/entities/cultivo_base.entity";
 import { Tratamiento } from "../../tratamiento/entities/tratamiento.entity";  
 
@@ -24,10 +24,11 @@ cantidad_sugerida: number;
 @Column({ type: 'varchar' })
 unidad_medida: string;
 
-@OneToMany(() => Tratamiento, tratamiento => tratamiento.planesManejo)
+@OneToMany(() => Tratamiento, tratamiento => tratamiento.planManejo)
 tratamientos: Tratamiento[];
 
 //Estas son las relaciones =>Cultivo base "De una A muchas" Plan de manejo
 @ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.planesManejo)
+@JoinColumn({ name: 'cultivo_base_id' })
 cultivoBase: CultivoBase;
 }

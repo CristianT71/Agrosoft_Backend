@@ -25,5 +25,6 @@ export class Evidencia {
   resultado_preliminar: string;
 
   @ManyToOne(() => Incidencia, (incidencia) => incidencia.evidencias) 
+  @JoinColumn({ name: 'incidencia_id' })
   incidencia: Incidencia;
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 import { AccionEjecutada } from "../../accion_ejecutada/entities/accion_ejecutada.entity";
 import { Cosecha } from "../../cosecha/entities/cosecha.entity";
@@ -29,5 +29,6 @@ export class CultivoReal {
     cosechas: Cosecha[];
 
     @ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.cultivosReales)
+    @JoinColumn({ name: 'cultivo_base_id' })
     cultivoBase: CultivoBase;
 }

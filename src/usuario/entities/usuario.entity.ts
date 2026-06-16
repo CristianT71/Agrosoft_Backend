@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 import { AccionEjecutada } from "../../accion_ejecutada/entities/accion_ejecutada.entity";
@@ -30,6 +30,7 @@ export class Usuario {
     // Relaciones 
 
     @ManyToOne(() => Rol, (rol) => rol.usuarios)
+    @JoinColumn({ name: 'rol_id' })
     rol: Rol;
 
     @OneToMany(() => Cosecha, (cosecha) => cosecha.usuario )
