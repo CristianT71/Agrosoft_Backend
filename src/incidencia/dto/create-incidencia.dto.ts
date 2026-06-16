@@ -25,5 +25,9 @@ export class CreateIncidenciaDto {
     @IsUUID()
     @IsOptional()
     cultivoRealId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    tipoIncidenciaId: string;
 }
 

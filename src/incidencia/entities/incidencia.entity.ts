@@ -4,6 +4,7 @@ import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
 import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
 import { Evidencia } from "../../evidencia/entities/evidencia.entity";
 import { Reporte } from "../../reporte/entities/reporte.entity";
+import { TipoIncidencia } from "../../tipo-incidencia/entities/tipo-incidencia.entity";
 
 @Entity()
 export class Incidencia {
@@ -39,4 +40,7 @@ export class Incidencia {
 
     @OneToMany(() => Reporte, (reporte) => reporte.incidencia)
     reportes: Reporte[];
+
+    @ManyToOne(() => TipoIncidencia, (tipoIncidencia) => tipoIncidencia.incidencias)
+    tipoIncidencia: TipoIncidencia;
 }
