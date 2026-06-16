@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "../../usuario/entities/usuario.entity";
 import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
+import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
 
 @Entity()
 export class Incidencia {
@@ -27,4 +28,7 @@ export class Incidencia {
 
     @ManyToOne(() => CultivoReal, (cultivoReal) => cultivoReal.incidencias)
     cultivoReal: CultivoReal;
+    
+    @OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.incidencia)
+    accionCorrectiva: AccionCorrectiva[];
 }

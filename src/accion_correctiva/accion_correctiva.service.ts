@@ -4,6 +4,9 @@ import { UpdateAccionCorrectivaDto } from './dto/update-accion_correctiva.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AccionCorrectiva } from './entities/accion_correctiva.entity';
+import { InsumoService } from '../insumo/insumo.service';
+import { IncidenciaService } from '../incidencia/incidencia.service';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Injectable()
 export class accion_correctivaService {
@@ -11,6 +14,9 @@ export class accion_correctivaService {
   constructor(
     @InjectRepository(AccionCorrectiva)
     private readonly accionCorrectivaRepository: Repository<AccionCorrectiva>,
+    private readonly insumoService: InsumoService,
+    private readonly incidenciaService: IncidenciaService,
+    private readonly usuarioService: UsuarioService,
   ){}
 
   async create(createAccionCorrectivaDto: CreateAccionCorrectivaDto) {
