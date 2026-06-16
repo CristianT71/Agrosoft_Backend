@@ -4,12 +4,8 @@ import { UpdateTratamientoDto } from './dto/update-tratamiento.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tratamiento } from './entities/tratamiento.entity';
-<<<<<<< HEAD
 import { PlanManejo } from '../plan_manejo/entities/plan_manejo.entity';
-=======
-import { PlanManejoService } from '../plan_manejo/plan_manejo.service';
-import { InsumoService } from '../insumo/insumo.service';
->>>>>>> origin/jhennedy_dev
+import { Insumo } from '../insumo/entities/insumo.entity';
 
 
 @Injectable()
@@ -18,27 +14,31 @@ export class TratamientoService {
   constructor(
     @InjectRepository(Tratamiento)
     private readonly tratamientoRepository: Repository<Tratamiento>,
-<<<<<<< HEAD
 
     @InjectRepository(PlanManejo)
-    private readonly planManejoRepository: Repository<PlanManejo>
-=======
-    private readonly planManejoService: PlanManejoService,
-    private readonly insumoService: InsumoService,
->>>>>>> origin/jhennedy_dev
+    private readonly planManejoRepository: Repository<PlanManejo>,
+
+    @InjectRepository(Insumo)
+    private readonly insumoRepository: Repository<Insumo>
   ){}
 
   async create(createTratamientoDto: CreateTratamientoDto) {
-    const { planManejoId, ...datosTratamiento } = createTratamientoDto; //Extraer id de plan manejo
+    const { planManejoId, insumoId, ...datosTratamiento } = createTratamientoDto; //Extraer id de plan manejo
 
     const planManejo = await this.planManejoRepository.findOneBy({ id: planManejoId }); // Validar que planManejo exista
     if (!planManejo) {
       throw new NotFoundException(`PlanManejo con id ${planManejoId} no existe`)
     }
+
+    const insumo = await this.insumoRepository.findOneBy({ id: insumoId });
+    if (!insumo) {
+      throw new NotFoundException(`Insumo con id ${insumoId} no existe`)
+    }
     try{
       const tratamiento = this.tratamientoRepository.create({
         ...datosTratamiento,
         planManejo,
+        insumo,
       });
       return await this.tratamientoRepository.save(tratamiento);
     }catch (error){

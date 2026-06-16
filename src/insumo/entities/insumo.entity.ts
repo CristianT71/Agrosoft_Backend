@@ -26,7 +26,7 @@ precio_unitario: string;
 @Column()
 estado: string;
 
-@OneToMany(() => Tratamiento, tratamiento => tratamiento.insumos)
+@OneToMany(() => Tratamiento, tratamiento => tratamiento.insumo)
 tratamientos: Tratamiento[];
 
 @OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.insumo)

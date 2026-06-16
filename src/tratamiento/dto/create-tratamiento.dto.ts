@@ -28,9 +28,9 @@ cantidad_sugerida: number;
 
 @IsUUID()
 @IsNotEmpty()
-id_plan_manejo: string; 
+planManejoId: string; 
 
 @IsUUID() 
 @IsNotEmpty()
-id_insumo: string;
+insumoId: string;
 }
