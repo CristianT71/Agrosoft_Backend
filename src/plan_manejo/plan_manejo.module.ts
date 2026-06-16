@@ -12,7 +12,6 @@ import { TratamientoModule } from '../tratamiento/tratamiento.module';
   imports: [
     TypeOrmModule.forFeature([PlanManejo]),
     CultivoBaseModule,
-    TratamientoModule,
   ],
   exports: [TypeOrmModule]
 })
