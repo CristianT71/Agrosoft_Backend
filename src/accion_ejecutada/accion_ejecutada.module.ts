@@ -9,12 +9,12 @@ import { CultivoRealModule } from '../cultivo_real/cultivo_real.module';
 @Module({
   controllers: [AccionEjecutadaController],
   providers: [AccionEjecutadaService],
-  exports: [AccionEjecutadaService],
 
 imports:[
   TypeOrmModule.forFeature([AccionEjecutada]),
   UsuarioModule,
   CultivoRealModule,
-]
+],
+exports: [TypeOrmModule],
 })
 export class AccionEjecutadaModule {}

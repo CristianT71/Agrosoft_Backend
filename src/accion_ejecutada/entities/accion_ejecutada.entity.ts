@@ -20,12 +20,10 @@ costo_aplicado: number;
 @Column({type: 'varchar', length: 255})
 observaciones: string;
 
-@ManyToOne(() => Usuario, usuario => usuario.accionesEjecutadas)
-@JoinColumn({name: 'usuario_id'})
+@ManyToOne(() => Usuario, (usuario) => usuario.accionesEjecutadas)
 usuario: Usuario;
 
-@ManyToOne(() => CultivoReal, cultivoReal => cultivoReal.accionesEjecutadas)
-@JoinColumn({name: 'cultivo_real_id'})
+@ManyToOne(() => CultivoReal, (cultivoReal) => cultivoReal.accionesEjecutadas)
 cultivoReal: CultivoReal;
 }
 

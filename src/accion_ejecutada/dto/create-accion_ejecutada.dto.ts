@@ -19,10 +19,10 @@ observaciones: string;
 
 @IsUUID()   
 @IsNotEmpty()
-id_cultivo_real: string;
+cultivoRealId: string;
 
 @IsUUID()
 @IsNotEmpty()
-id_usuario: string;
+usuarioId: string;
 
 }
