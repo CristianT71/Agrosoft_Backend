@@ -3,7 +3,7 @@ import { IsString, IsNotEmpty, IsNumber, IsOptional, IsDateString } from 'class-
 export class CreateEvidenciaDto {
   @IsNumber()
   @IsNotEmpty()
-  id_incidencia: number;
+  id_incidencia: number; // 👈 Mantenemos tu campo original
 
   @IsString()
   @IsNotEmpty()

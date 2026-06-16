@@ -1,12 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Incidencia } from '../../incidencia/entities/incidencia.entity'; // Asegúrate de que la ruta sea la correcta
 
 @Entity('evidencia')
 export class Evidencia {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column({ type: 'int' })
-  id_incidencia: number;
 
   @Column({ type: 'varchar', length: 255 })
   tipo_evidencia: string;
@@ -25,4 +23,9 @@ export class Evidencia {
 
   @Column({ type: 'text', nullable: true })
   resultado_preliminar: string;
+
+  // 🛠️ AQUÍ SE PONE EL DECORADOR MANYTOONE COMO TE LO PIDIERON:
+  @ManyToOne(() => Incidencia, { onDelete: 'CASCADE' }) // 👈 Quitamos el mapeo inverso (incidencia) => incidencia.evidencias
+@JoinColumn({ name: 'id_incidencia' })
+incidencia: Incidencia;
 }
