@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PlanManejo } from "../../plan_manejo/entities/plan_manejo.entity";
+import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
 
 @Entity()
 export class CultivoBase {
@@ -19,7 +20,10 @@ export class CultivoBase {
     estado: string;
 
     //Relaciones que les pongo
-    @OneToMany(() => PlanManejo, (PlanManejo) => PlanManejo.cultivoBase)
+    @OneToMany(() => PlanManejo, (planManejo) => planManejo.cultivoBase)
     planesManejo: PlanManejo[];
+
+    @OneToMany(() => CultivoReal, (cultivoReal) => cultivoReal.cultivoBase)
+    cultivosReales: CultivoReal[];
 
 }

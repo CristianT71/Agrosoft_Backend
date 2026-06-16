@@ -13,4 +13,8 @@ export class CreateCultivoRealDto {
     @IsString()
     @IsNotEmpty()
     estado: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    cultivoBaseId: string;
 }

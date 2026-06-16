@@ -4,20 +4,32 @@ import { UpdateCultivoRealDto } from './dto/update-cultivo_real.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CultivoReal } from './entities/cultivo_real.entity';
+import { CultivoBase } from '../cultivo_base/entities/cultivo_base.entity';
 
 @Injectable()
 export class CultivoRealService {
 
   constructor(
     @InjectRepository(CultivoReal)
-    private readonly CultivoRealRepository: Repository<CultivoReal>
+    private readonly cultivoRealRepository: Repository<CultivoReal>,
+
+    @InjectRepository(CultivoBase)
+    private readonly cultivoBaseRepository: Repository<CultivoBase>,
   ) {}
 
   async create(createCultivoRealDto: CreateCultivoRealDto) {
+    const {cultivoBaseId, ...datosCultivoReal} = createCultivoRealDto;
+
+    const cultivoBase = await this.cultivoBaseRepository.findOneBy({ id: cultivoBaseId });
+    if (!cultivoBase) {
+      throw new NotFoundException(`Cultivo Base con id ${cultivoBaseId} no existe`)
+    }
     try {
-      const cultivo_real = this.CultivoRealRepository.create(createCultivoRealDto); 
-      await this.CultivoRealRepository.save(cultivo_real);
-      return cultivo_real; 
+      const cultivoReal = this.cultivoRealRepository.create({
+        ...datosCultivoReal,
+        cultivoBase,
+      }); 
+      return await this.cultivoRealRepository.save(cultivoReal);
     } catch (error) {
       console.log(error);
       throw new InternalServerErrorException(`error al registrar el cultivo real`);
@@ -25,28 +37,28 @@ export class CultivoRealService {
   }
 
   async findAll() {
-    return await this.CultivoRealRepository.find();
+    return await this.cultivoRealRepository.find();
   }
 
   async findOne(id: string) {
-    const cultivo_real = await this.CultivoRealRepository.findOneBy({ id });
-    if (!cultivo_real) {
+    const cultivoReal = await this.cultivoRealRepository.findOneBy({ id });
+    if (!cultivoReal) {
       throw new NotFoundException(`Cultivo real con id ${id} no existe`);
     }
-    return cultivo_real;
+    return cultivoReal;
   }
 
   async update(id: string, updateCultivoRealDto: UpdateCultivoRealDto) {
-    const cultivo_real = await this.CultivoRealRepository.preload({
+    const cultivoReal = await this.cultivoRealRepository.preload({
       id,
       ...updateCultivoRealDto
     });
-    if (!cultivo_real) {
+    if (!cultivoReal) {
       throw new NotFoundException(`cultivo real con id ${id} no existe`);
     }
     try {
-      await this.CultivoRealRepository.save(cultivo_real);
-      return cultivo_real;
+      await this.cultivoRealRepository.save(cultivoReal);
+      return cultivoReal;
     } catch (error) {
       console.log(error);
       throw new InternalServerErrorException(`no se puede actualizar el cultivo real`);
@@ -54,8 +66,8 @@ export class CultivoRealService {
   }
 
   async remove(id: string) {
-    const cultivo_real = await this.findOne(id);
-    await this.CultivoRealRepository.remove(cultivo_real);
+    const cultivoReal = await this.findOne(id);
+    await this.cultivoRealRepository.remove(cultivoReal);
     return `el cultivo real fue eliminado exitosamente`;
   }
 }

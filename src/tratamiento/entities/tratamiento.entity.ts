@@ -28,8 +28,8 @@ cantidad_sugerida: number;
 
 //Estas son las relaciones => Plan de manejo "De una A muchas" Tratamientos
 @ManyToOne(() => PlanManejo, (planManejo) => planManejo.tratamientos)
-planesManejo: PlanManejo;
+planManejo: PlanManejo;
 
 @ManyToOne(() => Insumo, insumo => insumo.tratamientos)
-insumos: Insumo[];
+insumo: Insumo;
 }
