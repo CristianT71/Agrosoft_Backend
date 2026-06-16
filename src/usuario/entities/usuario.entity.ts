@@ -30,7 +30,7 @@ export class Usuario {
     // Relaciones 
 
     @ManyToOne(() => Rol, (rol) => rol.usuarios)
-    Rol: Rol;
+    rol: Rol;
 
     @OneToMany(() => Cosecha, (cosecha) => cosecha.usuario )
     cosechas: Cosecha[];
