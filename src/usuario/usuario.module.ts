@@ -12,7 +12,6 @@ import { RolModule } from '../rol/rol.module';
   providers: [UsuarioService],
   imports: [
     TypeOrmModule.forFeature([ Usuario ]),
-    CosechaModule,
     IncidenciaModule,
     RolModule,
   ],
