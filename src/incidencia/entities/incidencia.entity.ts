@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 import { Usuario } from "../../usuario/entities/usuario.entity";
 import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
 import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
+import { Evidencia } from "../../evidencia/entities/evidencia.entity";
 
 @Entity()
 export class Incidencia {
@@ -29,6 +30,9 @@ export class Incidencia {
     @ManyToOne(() => CultivoReal, (cultivoReal) => cultivoReal.incidencias)
     cultivoReal: CultivoReal;
     
-    @OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.incidencia)
+    @OneToMany(() => AccionCorrectiva, (accionCorrectiva) => accionCorrectiva.incidencia)
     accionesCorrectivas: AccionCorrectiva[];
+
+    @OneToMany(() => Evidencia, (evidencia) => evidencia.incidencia)
+    evidencias: Evidencia[];
 }

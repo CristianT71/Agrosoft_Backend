@@ -1,10 +1,7 @@
-import { IsString, IsNotEmpty, IsNumber, IsOptional, IsDateString } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsDateString, IsUUID } from 'class-validator';
 
 export class CreateEvidenciaDto {
-  @IsNumber()
-  @IsNotEmpty()
-  id_incidencia: number;
-
+  
   @IsString()
   @IsNotEmpty()
   tipo_evidencia: string;
@@ -28,4 +25,8 @@ export class CreateEvidenciaDto {
   @IsString()
   @IsOptional()
   resultado_preliminar?: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  incidenciaId: string;
 }
