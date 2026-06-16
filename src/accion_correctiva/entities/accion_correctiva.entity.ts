@@ -25,15 +25,15 @@ costo_aplicado: number;
 @Column({type: 'varchar', length: 255})
 resultado_preeliminar: string;
 
-@ManyToOne (() => Insumo, Insumo => Insumo.accionCorrectiva)
+@ManyToOne (() => Insumo, (insumo) => insumo.accionesCorrectivas)
 @JoinColumn({name: 'insumo_id'})
 insumo: Insumo;
 
-@ManyToOne(() => Incidencia, Incidencia => Incidencia.accionCorrectiva)
+@ManyToOne(() => Incidencia, (incidencia) => incidencia.accionesCorrectivas)
 @JoinColumn({name: 'incidencia_id'})
 incidencia: Incidencia;
 
-@ManyToOne(() => Usuario, Usuario => Usuario.accionCorrectiva)
+@ManyToOne(() => Usuario, (usuario) => usuario.accionesCorrectivas)
 @JoinColumn({name: 'usuario_id'})
 usuario: Usuario;
 

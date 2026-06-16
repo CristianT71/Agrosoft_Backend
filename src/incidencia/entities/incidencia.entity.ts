@@ -30,5 +30,5 @@ export class Incidencia {
     cultivoReal: CultivoReal;
     
     @OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.incidencia)
-    accionCorrectiva: AccionCorrectiva[];
+    accionesCorrectivas: AccionCorrectiva[];
 }

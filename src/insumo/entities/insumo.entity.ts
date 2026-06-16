@@ -30,6 +30,6 @@ estado: string;
 tratamientos: Tratamiento[];
 
 @OneToMany(() => AccionCorrectiva, accionCorrectiva => accionCorrectiva.insumo)
-accionCorrectiva: AccionCorrectiva[];
+accionesCorrectivas: AccionCorrectiva[];
 
 }

@@ -28,6 +28,6 @@ unidad_medida: string;
 tratamientos: Tratamiento[];
 
 //Estas son las relaciones =>Cultivo base "De una A muchas" Plan de manejo
-@ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.planManejo)
+@ManyToOne(() => CultivoBase, (cultivoBase) => cultivoBase.planesManejo)
 cultivoBase: CultivoBase;
 }

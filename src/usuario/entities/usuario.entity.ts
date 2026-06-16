@@ -37,5 +37,5 @@ export class Usuario {
     accionesEjecutadas: AccionEjecutada[];
 
     @OneToMany(() => AccionCorrectiva, (accionCorrectiva) => accionCorrectiva.usuario )
-    accionCorrectiva: AccionCorrectiva[];
+    accionesCorrectivas: AccionCorrectiva[];
 }
