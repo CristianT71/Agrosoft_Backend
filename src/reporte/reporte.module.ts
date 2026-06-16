@@ -6,6 +6,7 @@ import { Reporte } from './entities/reporte.entity';
 import { VentaModule } from '../venta/venta.module';
 import { CosechaModule } from '../cosecha/cosecha.module';
 import { IncidenciaModule } from '../incidencia/incidencia.module';
+import { UsuarioModule } from '../usuario/usuario.module';
 
 @Module({
   controllers: [ReporteController],
@@ -15,6 +16,7 @@ import { IncidenciaModule } from '../incidencia/incidencia.module';
     VentaModule,
     CosechaModule,
     IncidenciaModule,
+    UsuarioModule,
   ],
   exports: [TypeOrmModule]
 })

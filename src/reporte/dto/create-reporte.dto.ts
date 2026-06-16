@@ -25,5 +25,9 @@ export class CreateReporteDto {
     @IsUUID()
     @IsNotEmpty()
     incidenciaId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    usuarioId: string;
 }
 

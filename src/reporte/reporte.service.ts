@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { Venta } from '../venta/entities/venta.entity';
 import { Cosecha } from '../cosecha/entities/cosecha.entity';
 import { Incidencia } from '../incidencia/entities/incidencia.entity';
+import { Usuario } from '../usuario/entities/usuario.entity';
 
 @Injectable()
 export class ReporteService {
@@ -23,9 +24,12 @@ export class ReporteService {
 
     @InjectRepository (Incidencia)
     private readonly incidenciaRepository: Repository<Incidencia>,
+
+    @InjectRepository (Usuario)
+    private readonly usuarioRepository: Repository<Usuario>,
   ){}
   async create(createReporteDto: CreateReporteDto) {
-    const {ventaId, cosechaId, incidenciaId, ...datosReporte} = createReporteDto;
+    const {ventaId, cosechaId, incidenciaId, usuarioId, ...datosReporte} = createReporteDto;
 
     const venta = await this.ventaRepository.findOneBy({id: ventaId});
     if (!venta) {
@@ -42,12 +46,18 @@ export class ReporteService {
       throw new NotFoundException(`Incidencia con id ${incidencia} no existe`)
     }
 
+    const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId });
+    if (!usuario) {
+      throw new NotFoundException(`Usuario con id ${usuarioId} no existe`)
+    }
+
     try{
       const Reporte = this.reporteRepository.create({
       ...datosReporte,
       venta,
       cosecha,
       incidencia,
+      usuario,
       });
     return await this.reporteRepository.save(Reporte);
     }catch (error){

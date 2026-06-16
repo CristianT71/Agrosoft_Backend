@@ -3,6 +3,7 @@ import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 import { AccionEjecutada } from "../../accion_ejecutada/entities/accion_ejecutada.entity";
 import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
+import { Reporte } from "../../reporte/entities/reporte.entity";
 
 @Entity()
 export class Usuario {
@@ -38,4 +39,7 @@ export class Usuario {
 
     @OneToMany(() => AccionCorrectiva, (accionCorrectiva) => accionCorrectiva.usuario )
     accionesCorrectivas: AccionCorrectiva[];
+
+    @OneToMany(() => Reporte, (reporte) => reporte.usuario)
+    reportes: string;
 }
