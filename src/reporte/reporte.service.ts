@@ -43,7 +43,7 @@ export class ReporteService {
 
     const incidencia = await this.incidenciaRepository.findOneBy({ id: incidenciaId });
     if (!incidencia) {
-      throw new NotFoundException(`Incidencia con id ${incidencia} no existe`)
+      throw new NotFoundException(`Incidencia con id ${incidenciaId} no existe`)
     }
 
     const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId });
