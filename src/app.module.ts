@@ -31,6 +31,7 @@ import { ConfigModule } from '@nestjs/config';
       schema: 'public',
       synchronize: true
     }),
+
     UsuarioModule,
     IncidenciaModule,
     CosechaModule,
@@ -46,6 +47,7 @@ import { ConfigModule } from '@nestjs/config';
     AccionCorrectivaModule,
     AccionEjecutadaModule,
     TratamientoModule
+
   ],
   controllers: [],
   providers: [],

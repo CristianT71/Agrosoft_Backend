@@ -4,6 +4,8 @@ import { UpdateAccionEjecutadaDto } from './dto/update-accion_ejecutada.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AccionEjecutada } from './entities/accion_ejecutada.entity';
+import { Usuario } from '../usuario/entities/usuario.entity';
+import { CultivoReal } from '../cultivo_real/entities/cultivo_real.entity';
 
 
 @Injectable()
@@ -12,12 +14,34 @@ export class AccionEjecutadaService {
   constructor(
     @InjectRepository(AccionEjecutada)
     private readonly accionEjecutadaRepository: Repository<AccionEjecutada>,
+    
+    @InjectRepository(Usuario)
+    private readonly usuarioRepository: Repository<Usuario>,
+
+    @InjectRepository(CultivoReal)
+    private readonly cultivoRealRepository: Repository<CultivoReal>
   ){}
 
   async create(createAccionEjecutadaDto: CreateAccionEjecutadaDto) {
+    const {usuarioId, cultivoRealId, ...datosAccionEjecutada} = createAccionEjecutadaDto; //Estraenmos el id
+
+    const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId });
+    if (!usuario) {
+      throw new NotFoundException(`Usuario con id ${usuarioId} no existe`)
+    }
+
+    const cultivoReal = await this.cultivoRealRepository.findOneBy({ id: cultivoRealId });
+    if (!cultivoReal) {
+      throw new NotFoundException(`Cultivo con id ${cultivoRealId} no existe`)
+    }
+
     try{
-      const AccionEjecutada = this.accionEjecutadaRepository.create(createAccionEjecutadaDto);
-      await this.accionEjecutadaRepository.save(AccionEjecutada);
+      const accionEjecutada = this.accionEjecutadaRepository.create({
+        ...datosAccionEjecutada,
+        usuario,
+        cultivoReal
+      });
+      return await this.accionEjecutadaRepository.save(accionEjecutada);
     }catch (error){
       console.log(error);
       throw new InternalServerErrorException('error al registrar una accion_ejecutada');
@@ -30,24 +54,24 @@ export class AccionEjecutadaService {
   }
 
   async findOne(id: string) {
-  const AccionEjecutada = await this.accionEjecutadaRepository.findOneBy({ id});
-  if (!AccionEjecutada){
+  const accionEjecutada = await this.accionEjecutadaRepository.findOneBy({ id});
+  if (!accionEjecutada){
     throw new NotFoundException(`accion_ejecutada con id ${id} no existe`)
   }
-  return AccionEjecutada;
+  return accionEjecutada;
   }
 
   async update(id: string, updateAccionEjecutadaDto: UpdateAccionEjecutadaDto) {
-    const AccionEjecutada = await this.accionEjecutadaRepository.preload({
+    const accionEjecutada = await this.accionEjecutadaRepository.preload({
       id,
       ...updateAccionEjecutadaDto,
     });
-    if (!AccionEjecutada){
+    if (!accionEjecutada){
       throw new NotFoundException(`AccionEjecutada con id ${id} no existe`)
     }
     try{
-      await this.accionEjecutadaRepository.save(AccionEjecutada);
-      return AccionEjecutada; 
+      await this.accionEjecutadaRepository.save(accionEjecutada);
+      return accionEjecutada; 
     } catch (error){
       throw new InternalServerErrorException('No se puede actualizar la accion_ejecutada')
     }
@@ -55,8 +79,8 @@ export class AccionEjecutadaService {
   }
 
   async remove(id: string) {
-    const AccionEjecutada = await this.findOne(id);
-    await this.accionEjecutadaRepository.remove(AccionEjecutada);
+    const accionEjecutada = await this.findOne(id);
+    await this.accionEjecutadaRepository.remove(accionEjecutada);
     return 'AccionEjecutada eliminada correctamente';
   }
 }

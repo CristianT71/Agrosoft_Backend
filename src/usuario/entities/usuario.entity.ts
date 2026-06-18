@@ -1,6 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 import { Incidencia } from "../../incidencia/entities/incidencia.entity";
+import { AccionEjecutada } from "../../accion_ejecutada/entities/accion_ejecutada.entity";
+import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
+import { Reporte } from "../../reporte/entities/reporte.entity";
+import { Rol } from "../../rol/entities/rol.entity";
 
 @Entity()
 export class Usuario {
@@ -25,9 +29,22 @@ export class Usuario {
 
     // Relaciones 
 
+    @ManyToOne(() => Rol, (rol) => rol.usuarios)
+    @JoinColumn({ name: 'rol_id' })
+    rol: Rol;
+
     @OneToMany(() => Cosecha, (cosecha) => cosecha.usuario )
     cosechas: Cosecha[];
 
     @OneToMany(() => Incidencia, (incidencia) => incidencia.usuario )
     incidencias: Incidencia[];
+
+    @OneToMany(() => AccionEjecutada, (accion) => accion.usuario )
+    accionesEjecutadas: AccionEjecutada[];
+
+    @OneToMany(() => AccionCorrectiva, (accionCorrectiva) => accionCorrectiva.usuario )
+    accionesCorrectivas: AccionCorrectiva[];
+
+    @OneToMany(() => Reporte, (reporte) => reporte.usuario)
+    reportes: Reporte[];
 }

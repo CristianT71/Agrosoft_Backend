@@ -25,4 +25,8 @@ export class CreateCosechaDto {
     @IsUUID()
     @IsNotEmpty()
     usuarioId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    cultivoRealId: string;
 }

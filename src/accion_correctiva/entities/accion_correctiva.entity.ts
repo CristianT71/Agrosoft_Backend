@@ -1,9 +1,12 @@
-import { Column, Entity, PrimaryColumn} from "typeorm"
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm"
+import { Insumo } from "../../insumo/entities/insumo.entity";
+import { Incidencia } from "../../incidencia/entities/incidencia.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Entity('accion_correctiva')
 export class AccionCorrectiva {
 
-@PrimaryColumn({type: 'uuid'})
+@PrimaryGeneratedColumn('uuid')
 id: string;
 
 @Column({type: 'varchar', length: 255})
@@ -20,5 +23,17 @@ costo_aplicado: number;
 
 @Column({type: 'varchar', length: 255})
 resultado_preeliminar: string;
+
+@ManyToOne (() => Insumo, (insumo) => insumo.accionesCorrectivas)
+@JoinColumn({name: 'insumo_id'})
+insumo: Insumo;
+
+@ManyToOne(() => Incidencia, (incidencia) => incidencia.accionesCorrectivas)
+@JoinColumn({name: 'incidencia_id'})
+incidencia: Incidencia;
+
+@ManyToOne(() => Usuario, (usuario) => usuario.accionesCorrectivas)
+@JoinColumn({name: 'usuario_id'})
+usuario: Usuario;
 
 }

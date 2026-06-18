@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import { Incidencia } from "../../incidencia/entities/incidencia.entity";
 
 @Entity()
 export class TipoIncidencia {
@@ -17,4 +18,6 @@ export class TipoIncidencia {
     @Column({ type: 'varchar'})
     descripcion: string;
 
+    @OneToMany(() => Incidencia, (incidencia) => incidencia.tipoIncidencia)
+    incidencias: Incidencia[];
 }

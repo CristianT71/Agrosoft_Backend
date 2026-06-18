@@ -1,4 +1,5 @@
-import { IsString, IsNumber, IsNotEmpty, IsDateString } from 'class-validator';
+import { IsString, IsNumber, IsNotEmpty, IsDateString, IsUUID } from 'class-validator';
+
 export class CreateTratamientoDto {
 
 @IsString()
@@ -24,4 +25,12 @@ descripcion: string;
 @IsNumber()
 @IsNotEmpty()
 cantidad_sugerida: number;
+
+@IsUUID()
+@IsNotEmpty()
+planManejoId: string; 
+
+@IsUUID() 
+@IsNotEmpty()
+insumoId: string;
 }

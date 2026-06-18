@@ -16,6 +16,18 @@ export class CreateReporteDto {
 
     @IsUUID()
     @IsNotEmpty()
-    ventaId:string;
+    ventaId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    cosechaId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    incidenciaId: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    usuarioId: string;
 }
 

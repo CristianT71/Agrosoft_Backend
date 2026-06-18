@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, IsUUID } from "class-validator";
 
 
 export class CreateCultivoRealDto {
@@ -14,4 +14,7 @@ export class CreateCultivoRealDto {
     @IsNotEmpty()
     estado: string;
 
+    @IsUUID()
+    @IsNotEmpty()
+    cultivoBaseId: string;
 }

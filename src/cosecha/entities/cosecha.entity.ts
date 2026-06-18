@@ -1,5 +1,8 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "../../usuario/entities/usuario.entity";
+import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
+import { Venta } from "../../venta/entities/venta.entity";
+import { Reporte } from "../../reporte/entities/reporte.entity";
 
 @Entity()
 export class Cosecha {
@@ -25,5 +28,17 @@ export class Cosecha {
     //Relaciones
 
     @ManyToOne(() => Usuario, (usuario) => usuario.cosechas, { onDelete: 'CASCADE' }) //onDelete: 'CASCADE' si un usuario se borra tambien sus cosechas registradas
+    @JoinColumn({ name: 'usuario_id' })
     usuario: Usuario;
+    
+
+    @ManyToOne(() => CultivoReal, (cultivoReal) => cultivoReal.cosechas)
+    @JoinColumn({ name: 'cultivo_real_id' })
+    cultivoReal: CultivoReal;
+
+    @OneToMany(() => Venta, (venta) => venta.cosecha)
+    ventas: Venta[];
+
+    @OneToMany(() => Reporte, (reporte) => reporte.cosecha)
+    reportes: Reporte[];
 }

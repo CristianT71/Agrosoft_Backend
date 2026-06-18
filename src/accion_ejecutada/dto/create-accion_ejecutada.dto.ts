@@ -1,5 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
-
+import { IsDateString, IsNotEmpty, IsNumber, IsString, IsUUID } from "class-validator";
 
 export class CreateAccionEjecutadaDto {
 @IsDateString()
@@ -18,5 +17,12 @@ costo_aplicado: number;
 @IsNotEmpty()
 observaciones: string;
 
+@IsUUID()   
+@IsNotEmpty()
+cultivoRealId: string;
+
+@IsUUID()
+@IsNotEmpty()
+usuarioId: string;
 
 }

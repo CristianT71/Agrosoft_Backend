@@ -1,6 +1,6 @@
-import { IsString } from "class-validator";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, JoinColumn } from "typeorm";
 import { Reporte } from "../../reporte/entities/reporte.entity";
+import { Cosecha } from "../../cosecha/entities/cosecha.entity";
 
 @Entity()
 export class Venta {
@@ -26,6 +26,9 @@ export class Venta {
     estado_pago: string;
     
     @OneToMany(() => Reporte, (reporte) => reporte.venta)
-    reporte: Reporte
-    reportes: any;
+    reportes: Reporte[];
+
+    @ManyToOne(() => Cosecha, (cosecha) => cosecha.ventas)
+    @JoinColumn({ name: 'cosecha_id' })
+    cosecha: Cosecha;
 }

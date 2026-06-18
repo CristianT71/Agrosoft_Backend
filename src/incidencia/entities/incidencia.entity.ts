@@ -1,5 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "../../usuario/entities/usuario.entity";
+import { CultivoReal } from "../../cultivo_real/entities/cultivo_real.entity";
+import { AccionCorrectiva } from "../../accion_correctiva/entities/accion_correctiva.entity";
+import { Evidencia } from "../../evidencia/entities/evidencia.entity";
+import { Reporte } from "../../reporte/entities/reporte.entity";
+import { TipoIncidencia } from "../../tipo-incidencia/entities/tipo-incidencia.entity";
 
 @Entity()
 export class Incidencia {
@@ -22,5 +27,23 @@ export class Incidencia {
     //relaciones
 
     @ManyToOne(() => Usuario, (usuario) => usuario.incidencias, { onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'usuario_id' })
     usuario: Usuario;
+
+    @ManyToOne(() => CultivoReal, (cultivoReal) => cultivoReal.incidencias)
+    @JoinColumn({ name: 'cultivo_real_id' })
+    cultivoReal: CultivoReal;
+    
+    @OneToMany(() => AccionCorrectiva, (accionCorrectiva) => accionCorrectiva.incidencia)
+    accionesCorrectivas: AccionCorrectiva[];
+
+    @OneToMany(() => Evidencia, (evidencia) => evidencia.incidencia)
+    evidencias: Evidencia[];
+
+    @OneToMany(() => Reporte, (reporte) => reporte.incidencia)
+    reportes: Reporte[];
+
+    @ManyToOne(() => TipoIncidencia, (tipoIncidencia) => tipoIncidencia.incidencias)
+    @JoinColumn({ name: 'tipo_incidencia_id' })
+    tipoIncidencia: TipoIncidencia;
 }

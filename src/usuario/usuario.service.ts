@@ -5,19 +5,30 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
 import { hash } from 'bcrypt';
+import { Rol } from '../rol/entities/rol.entity';
 
 @Injectable()
 export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>,
+
+    @InjectRepository(Rol)
+    private readonly rolRepository: Repository<Rol>,
   ){}
   async create(createUsuarioDto: CreateUsuarioDto) {
+    const { rolId, ...datosUsuario } = createUsuarioDto; // Extraer Id de rol
+
+    const rol = await this.rolRepository.findOneBy({ id: rolId }); //validar que rol exista
+    if(!rol) {
+      throw new NotFoundException(`Rol con id ${rolId} no existe`)
+    }
     try{
       const contraseñaHash = await hash(createUsuarioDto.contraseña, 10);
       const usuario = this.usuarioRepository.create({
-        ...createUsuarioDto,
+        ...datosUsuario,
         contraseña: contraseñaHash,
+        rol, 
       });
       return await this.usuarioRepository.save(usuario);
     } catch(error){
