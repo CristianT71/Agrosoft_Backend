@@ -29,7 +29,7 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       schema: 'public',
-      synchronize: true
+      synchronize: false
     }),
 
     UsuarioModule,
