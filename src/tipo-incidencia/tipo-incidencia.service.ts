@@ -16,6 +16,7 @@ export class TipoIncidenciaService {
     try {
     const tipoIncidencia = this.tipoIncidenciaRepository.create(createTipoIncidenciaDto);
     await this.tipoIncidenciaRepository.save(tipoIncidencia);
+    return tipoIncidencia;
   } catch (error) {
     throw new InternalServerErrorException('Error al registrar tipo incidencia');
   }
@@ -28,17 +29,25 @@ export class TipoIncidenciaService {
   async findOne(id: string) {
     const tipoIncidencia = await this.tipoIncidenciaRepository.findOneBy({ id });
     if (!tipoIncidencia) {
-      throw new InternalServerErrorException('Tipo incidencia con el id ${id} no encontrado');
+      throw new NotFoundException('Tipo incidencia con el id ${id} no encontrado');
     }
     return tipoIncidencia;
   }
 
   async update(id: string, updateTipoIncidenciaDto: UpdateTipoIncidenciaDto) {
     const tipoIncidencia = await this.tipoIncidenciaRepository.preload({
-      id, ...updateTipoIncidenciaDto,
+      id, 
+      ...updateTipoIncidenciaDto,
     });
     if(!tipoIncidencia) {
       throw new NotFoundException(`Tipo incidencia con el id ${id} no encontrado`)
+  }
+  try {
+    await this.tipoIncidenciaRepository.save(tipoIncidencia);
+    return tipoIncidencia;
+  } catch (error) {
+    console.log(error);
+    throw new InternalServerErrorException(`Error al actualizar tipo de incidencia`)
   }
   }
   async remove(id: string) {

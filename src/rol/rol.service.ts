@@ -41,6 +41,14 @@ export class RolService {
     if (!rol) {
       throw new NotFoundException(`Rol con id ${id} no encontrado`);
     }
+
+    try {
+      await this.rolRepository.save(rol);
+      return rol;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Error al actualizar el rol')
+    }
   }
 
   async remove(id: string) {
