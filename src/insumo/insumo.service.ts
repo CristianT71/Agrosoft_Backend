@@ -20,6 +20,7 @@ export class InsumoService {
       const Insumo = this.InsumoRepository.create
       (createInsumoDto);
       await this.InsumoRepository.save(Insumo);
+      return Insumo;
     }catch (error){
       console.log(error);
       throw new InternalServerErrorException('error al registrar el insumo');

@@ -29,7 +29,7 @@ export class TipoIncidenciaService {
   async findOne(id: string) {
     const tipoIncidencia = await this.tipoIncidenciaRepository.findOneBy({ id });
     if (!tipoIncidencia) {
-      throw new NotFoundException('Tipo incidencia con el id ${id} no encontrado');
+      throw new NotFoundException(`Tipo incidencia con el id ${id} no encontrado`);
     }
     return tipoIncidencia;
   }

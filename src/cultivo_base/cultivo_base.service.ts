@@ -16,6 +16,7 @@ export class CultivoBaseService {
     try {
       const cultivobase = this.cultivoBaseRepository.create(createCultivoBaseDto);
       await this.cultivoBaseRepository.save(cultivobase);
+      return cultivobase;
     } catch (error) {
       console.log(error);
       throw new InternalServerErrorException('Error al registrar el cultivo')
