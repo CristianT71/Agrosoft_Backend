@@ -18,7 +18,7 @@ Agrosoft: Sistema de gestión de cultivos para el Tecnoparque Yamboró. Proyecto
 
 Instalar dependencias:
 
-    npm install
+    npm i
 
 Levantar la base de datos con Docker:
 
